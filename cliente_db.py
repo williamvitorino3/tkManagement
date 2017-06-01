@@ -2,7 +2,7 @@
 # http://pythonclub.com.br/gerenciando-banco-dados-sqlite3-python-parte1.html
 
 # TODO: Implementar macros para o tipo de atendimento.
-"""
+u"""
 Tipo de Atendimento:
 - Cortesia
 - Particular
@@ -16,6 +16,7 @@ Tipo de Atendimento:
 
 import sqlite3
 from datetime import datetime
+
 
 def criar_banco():
     """Cria o banco de dados."""
@@ -33,8 +34,10 @@ def criar_banco():
     """)
     conn.close()
 
+
 def _now_(formato="%d/%m/%Y"):
     return datetime.today().strftime(formato)
+
 
 def inserir(nome="None", data_nascimento="None", tipo_atendimento="None"):
     """Insere dados no banco."""
@@ -42,12 +45,14 @@ def inserir(nome="None", data_nascimento="None", tipo_atendimento="None"):
     cursor = conn.cursor()
     # print(nome, data_nascimento, plano)
     cursor.execute("""
-    INSERT INTO clientes (data_atendimento, nome, data_nascimento, tipo_atendimento)
+    INSERT INTO clientes
+                (data_atendimento, nome, data_nascimento, tipo_atendimento)
     VALUES (?, ?, ?, ?)
     """, (_now_(), nome, data_nascimento, tipo_atendimento))
 
     conn.commit()
     conn.close()
+
 
 def buscar_all():
     """Busca dados no banco."""
@@ -57,6 +62,7 @@ def buscar_all():
     resultado = cursor.fetchall()
     conn.close()
     return resultado
+
 
 def buscar(nome):
     """Busca dados no banco."""
@@ -70,6 +76,7 @@ def buscar(nome):
     conn.close()
     return resultado
 
+
 def remover(id_cliente):
     """Remove do banco o cliente com o ID recebido."""
     conn = sqlite3.connect('clientes.db')
@@ -81,23 +88,27 @@ def remover(id_cliente):
     conn.commit()
     conn.close()
 
+
 def atualizar(id_cliente, nome, data_nascimento, tipo_atendimento):
     """Atualiza no banco os dados do cliente com o ID recebido."""
     conn = sqlite3.connect('clientes.db')
     cursor = conn.cursor()
     cursor.execute("""
     UPDATE clientes
-    SET data_atendimento = ?, nome = ?, data_nascimento = ?, tipo_atendimento = ?
+    SET data_atendimento = ?, nome = ?,
+        data_nascimento = ?, tipo_atendimento = ?
     WHERE id = ?
     """, (_now_(), nome, data_nascimento, tipo_atendimento, id_cliente))
     conn.commit()
     conn.close()
+
 
 def add_clientes_teste():
     """Adiciona a lista de clientes no banco."""
     with open("clientes_falsos.txt", 'r') as arquivo:
         for line in arquivo.readlines():
             inserir(*line.rstrip().split(','))
+
 
 if __name__ == '__main__':
     criar_banco()

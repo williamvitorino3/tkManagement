@@ -1,7 +1,5 @@
 """Pacote com componentes customizados."""
 
-# -*- coding: utf-8 -*-
-
 import tkinter as tk
 import dafaults as tema
 from table import Tabela
@@ -25,15 +23,15 @@ class ChooseMenu(object):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(bd=2, bg=tema.bg_borda)
         self.frame.configure(bd=10, bg=tema.bg_widget)
-        self.label.configure(bg=tema.bg_widget, fg=tema.fg_widget, width=20)
-        self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
+        self.label.configure(tema.CHOOSE_LISTBOX)
+        self.entry.configure(width=135, bg=tema.bg_widget,
                              fg=tema.fg_widget, height=1, bd=2)
-        self.opcoes.configure(bg=tema.bg_widget, relief=tk.RAISED, width=12)
+        self.opcoes.configure(width=12, **tema.CHOOSE_BUTTONS)
         self.opcoes.menu = tk.Menu(self.opcoes, tearoff=0)
         self.opcoes['menu'] = self.opcoes.menu
         for atendimento in tema.ATENDIMENTOS:
             self.insert_option(atendimento)
-        self.opcoes.menu.configure(bg=tema.bg_widget)
+        self.opcoes.menu.configure(**tema.CHOOSE_BUTTONS)
 
     def set(self, item):
         """Setter da classe."""
@@ -79,8 +77,7 @@ class TextBox(object):
         self.frame_bd.configure(bd=2, bg=tema.bg_borda)
         self.frame.configure(bd=10, bg=tema.bg_widget)
         self.label.configure(bg=tema.bg_widget, fg=tema.fg_widget, width=20)
-        self.entry.configure(justify=tk.LEFT, width=150, bg=tema.bg_widget,
-                             insertbackground=tema.insert_bg)
+        self.entry.configure(**tema.ENTRY_TEXT)
 
     def pack(self, side=tk.TOP):
         u"""Substituição do método pack()."""
@@ -110,7 +107,7 @@ class SearchBox(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(bd=2, bg=tema.bg_borda)
+        self.frame_bd.configure(**tema.BORDA)
         self.frame.configure(bd=10, bg=tema.bg_widget)
         self.label.configure(bg=tema.bg_widget, fg=tema.fg_widget, width=20)
         self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
@@ -181,5 +178,6 @@ class Lista(object):
         u"""Apaga todas as posições da."""
         _itens_ = self.list.size()
         if _itens_ > 0:
+            print("Deletando")
             self.list.delete(0, _itens_-1)
         return []

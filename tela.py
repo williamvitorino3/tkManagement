@@ -49,10 +49,10 @@ class Janela(object):
     def set_clientes(self):
         """Adiciona os dados na lista de clientes."""
         for cliente in self.clientes:
-            self.lista_clientes.list.insert("Nome", cliente[1])
-            self.lista_clientes.list.insert("Data do Atendimento", cliente[2])
-            self.lista_clientes.list.insert("Data Nascimento", cliente[3])
-            self.lista_clientes.list.insert("Tipo de Atendimento", cliente[4])
+            self.lista_clientes.insert("Nome", cliente[1])
+            self.lista_clientes.insert("Data do Atendimento", cliente[2])
+            self.lista_clientes.insert("Data Nascimento", cliente[3])
+            self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
 
     def _pesquisa_init_(self):
         """Pesquisa inicial da tela."""
@@ -99,6 +99,7 @@ class Janela(object):
     def pesquisar(self):
         """Pesquisa clientes no banco."""
         # TODO: Encontrar um modo melhor de fazer isso.
+        print(__name__)
         self.lista = self.lista_clientes.reset()
         self.clientes = db.buscar(self.pesquisa.entry.get())
         self.set_clientes()
