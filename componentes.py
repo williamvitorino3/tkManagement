@@ -49,7 +49,7 @@ class ChooseMenu(object):
 
     def get(self):
         """Devolve o valor da escolha."""
-        return self.escolha.get()
+        return self.escolha.get().split("'")[1]
 
     def insert_option(self, label):
         u"""Substituição do método insert()."""

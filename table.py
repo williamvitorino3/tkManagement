@@ -68,6 +68,7 @@ class Tabela(object):
         """Inseri dados na coluna especificada."""
         self.colunas[coluna].lista.insert(-1, arg)
         self.colunas[coluna].lista.see(-1)
+        # TODO: Tentar desolver a string do atendimento.
 
     def curselection(self):
         u"""Devolve as posições selecionadas."""

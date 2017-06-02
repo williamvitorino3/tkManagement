@@ -99,8 +99,8 @@ class Janela(object):
 
     def pesquisar(self):
         """Pesquisa clientes no banco."""
-        # TODO: Encontrar um modo melhor de fazer isso.
-        self.lista = self.lista_clientes.reset()
+        self.lista_clientes.reset()
+        self.clientes.clear()
         self.clientes = db.buscar(self.pesquisa.entry.get())
         self.set_clientes()
         self.pesquisa.entry.delete(0, tk.END)
