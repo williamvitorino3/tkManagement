@@ -1,0 +1,5 @@
+# Para arquivos de banco de dados locais.
+*.db
+
+# Para arquivos cyton.
+*.pyc

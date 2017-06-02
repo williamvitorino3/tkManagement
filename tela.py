@@ -48,7 +48,7 @@ class Janela(object):
 
     def set_clientes(self):
         """Adiciona os dados na lista de clientes."""
-        for cliente in self.clientes:
+        for cliente in self.clientes[::-1]:
             self.lista_clientes.insert("Nome", cliente[1])
             self.lista_clientes.insert("Data do Atendimento", cliente[2])
             self.lista_clientes.insert("Data Nascimento", cliente[3])
@@ -78,7 +78,8 @@ class Janela(object):
 
     def atualizar(self):
         """Atualiza os dados da tabela."""
-        self.lista = self.lista_clientes.reset()
+        self.lista_clientes.reset()
+        self.clientes.clear()
         self.pesquisa.entry.focus_force()
         self._pesquisa_init_()
 

@@ -6,8 +6,8 @@ Widget de lista com multiplas colunas.
 Implementação de uma tabela.
 """
 
-import tkinter as tk
 from tkinter import ttk
+import tkinter as tk
 
 
 class Coluna(object):

@@ -172,9 +172,5 @@ class Lista(object):
         self.list.insert(*args)
 
     def reset(self):
-        u"""Apaga todas as posições da."""
-        _itens_ = self.list.size()
-        if _itens_ > 0:
-            print("Deletando")
-            self.list.delete(0, _itens_-1)
-        return []
+        u"""Apaga todas as posições da lista."""
+        self.list.delete(0, self.list.size()-1)
