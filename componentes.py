@@ -1,4 +1,6 @@
 """Pacote com componentes customizados."""
+# -*- coding: utf-8 -*-
+
 
 import tkinter as tk
 import dafaults as tema
@@ -35,7 +37,6 @@ class ChooseMenu(object):
 
     def set(self, item):
         """Setter da classe."""
-        print(item)
         self.escolha.set(item[0])
 
     def pack(self, **kwargs):
@@ -49,10 +50,6 @@ class ChooseMenu(object):
     def get(self):
         """Devolve o valor da escolha."""
         return self.escolha.get()
-
-    def set(self, valor):
-        """Define um valor para a escolha."""
-        self.escolha.set(valor)
 
     def insert_option(self, label):
         u"""Substituição do método insert()."""
