@@ -3,3 +3,6 @@
 
 # Para arquivos cyton.
 *.pyc
+
+# Ignorar os arquivos de cache do python.
+__pycache__/
