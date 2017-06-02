@@ -38,4 +38,4 @@ fg_widget = "#000000"
 insert_bg = fg_widget
 justify_text = "center"
 ATENDIMENTOS = ["Cortesia", "Particular", "Amil", "Cafaz", "Cassi", "Geap",
-                "Saúde Caixa", "Unimed"]
+                "Saúde_Caixa", "Unimed"]
