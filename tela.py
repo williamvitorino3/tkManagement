@@ -21,6 +21,7 @@ class Janela(object):
         self.frame_dados_cliente = tk.Frame(self.janela)
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
         self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
+        self.data_nasc.entry.configure(width=60)
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
                                           text="Tipo de Atendimento")
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
@@ -44,7 +45,7 @@ class Janela(object):
         self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
         self.data_nasc.pack(side=tk.LEFT)
-        self.atendimento.pack(side=tk.RIGHT)
+        self.atendimento.pack(side=tk.LEFT)
         self.pesquisa.pack(side=tk.TOP)
         self.lista_clientes.pack()
         self.atualizar()
