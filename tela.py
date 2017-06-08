@@ -9,6 +9,7 @@ import cliente_db as db
 # TODO: Quantos dias a pessoas esta cadastrada.
 # TODO: Tempo do último atendimento.
 # TODO: Implementar um componente de data.
+# TODO: Reorganizar a data de nascimento e o tipo de atendimento.
 
 
 class Janela(object):
@@ -17,9 +18,10 @@ class Janela(object):
     def __init__(self, root):
         """Construtor da classe."""
         self.janela = tk.Frame(root)
-        self.nome = wid.TextBox(self.janela, text="Nome")
-        self.data_nasc = wid.TextBox(self.janela, text="Data Nascimento")
-        self.atendimento = wid.ChooseMenu(self.janela,
+        self.frame_dados_cliente = tk.Frame(self.janela)
+        self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
+        self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
+        self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
                                           text="Tipo de Atendimento")
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
         self.lista_clientes = wid.Lista(self.janela)
@@ -39,9 +41,10 @@ class Janela(object):
         self.lista_clientes.edit_button.configure(command=self.editar)
         self.pesquisa.button.configure(command=self.pesquisar)
         self.janela.pack()
+        self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
-        self.data_nasc.pack(side=tk.TOP)
-        self.atendimento.pack(side=tk.TOP)
+        self.data_nasc.pack(side=tk.LEFT)
+        self.atendimento.pack(side=tk.RIGHT)
         self.pesquisa.pack(side=tk.TOP)
         self.lista_clientes.pack()
         self.atualizar()
