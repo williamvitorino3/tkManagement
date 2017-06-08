@@ -13,6 +13,7 @@ CHOOSE_BUTTONS = {
 CHOOSE_LISTBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
+    "justify": "center",
     "width": 20,
     "height": 1,
     "bd": 2
@@ -21,7 +22,7 @@ CHOOSE_LISTBOX = {
 ENTRY_TEXT = {
     "background": "#eff0f1",
     "foreground": "#000000",
-    "justify": "left",
+    "justify": "center",
     "insertbackground": "#000000",
     "width": 150,
 }

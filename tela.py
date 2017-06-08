@@ -96,7 +96,7 @@ class Janela(object):
             self.lista_clientes.add_button.configure(text="Atualizar",
                                                      command=self.update)
         elif self.lista_clientes.add_button["text"] == "Atualizar":
-            self.lista_clientes.add_button.configure(text="Adicionar",
+            self.lista_clientes.add_button.configure(text="Cadastrar",
                                                      command=self.adicionar)
 
     def pesquisar(self):
