@@ -7,9 +7,7 @@ import componentes as wid
 import cliente_db as db
 # TODO: Adicionar confirmação da remoção.
 # TODO: Quantos dias a pessoas esta cadastrada.
-# TODO: Tempo do último atendimento.
 # TODO: Implementar um componente de data.
-# TODO: Reorganizar a data de nascimento e o tipo de atendimento.
 
 
 class Janela(object):
@@ -32,7 +30,7 @@ class Janela(object):
 
     def _main_(self):
         u"""Método principal da Classe."""
-        self.lista_clientes.list.add_colunm("Data do Atendimento", width=32)
+        self.lista_clientes.list.add_colunm("Último Atendimento", width=32)
         self.lista_clientes.list.add_colunm("Nome", width=32)
         self.lista_clientes.list.add_colunm("Data Nascimento", width=32)
         self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=32)
@@ -54,7 +52,7 @@ class Janela(object):
         """Adiciona os dados na lista de clientes."""
         for cliente in self.clientes[::-1]:
             self.lista_clientes.insert("Nome", cliente[1])
-            self.lista_clientes.insert("Data do Atendimento", cliente[2])
+            self.lista_clientes.insert("Último Atendimento", cliente[2])
             self.lista_clientes.insert("Data Nascimento", cliente[3])
             self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
 
