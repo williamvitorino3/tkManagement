@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
 # http://pythonclub.com.br/gerenciando-banco-dados-sqlite3-python-parte1.html
 
-# TODO: Implementar macros para o tipo de atendimento.
-u"""
-Tipo de Atendimento:
-- Cortesia
-- Particular
-- Amil
-- Cafaz
-- Cassi
-- Geap
-- Saúde Caixa
-- Unimed
-"""
 
 import sqlite3
 from datetime import datetime
@@ -43,7 +31,6 @@ def inserir(nome="None", data_nascimento="None", tipo_atendimento="None"):
     """Insere dados no banco."""
     conn = sqlite3.connect('clientes.db')
     cursor = conn.cursor()
-    # print(nome, data_nascimento, plano)
     cursor.execute("""
     INSERT INTO clientes
                 (data_atendimento, nome, data_nascimento, tipo_atendimento)
