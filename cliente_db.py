@@ -71,7 +71,7 @@ def buscar(nome):
     cursor.execute("""
     SELECT * FROM clientes
     WHERE nome like ?
-    """, (nome + '%', ))
+    """, ('%' + nome + '%', ))
     resultado = cursor.fetchall()
     conn.close()
     return resultado
