@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from componentes import CustomCombobox as ccb
 
 class App:
 
@@ -22,5 +23,4 @@ class App:
 
 if __name__ == '__main__':
     root = Tk()
-    app = App(root)
     root.mainloop()

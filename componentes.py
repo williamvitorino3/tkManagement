@@ -7,16 +7,51 @@ from tkinter import ttk
 import dafaults as tema
 from table import Tabela
 
+
+class CustomCombobox(object):
+    """Combobox customizado."""
+    def __init__(self, tela, range_limite, text):
+        self.frame = tk.Frame(tela)
+        self._label = tk.Label(self.frame, text=text)
+        self._day = tk.StringVar()
+        self._widget_day = ttk.Combobox(self.frame, textvariable=self._day)
+        self._configure_(range_limite)
+
+    def _configure_(self, range_limite):
+        self._widget_day['values'] = [str(i+1) for i in range(0, range_limite)]
+        self._widget_day.current(len(self._widget_day['values'])-1)
+        self._widget_day.configure(width=5, justify=tk.CENTER)
+
+    def pack(self, **kwargs):
+        """Atalho para o gerênciador de geometria."""
+        self.frame.pack(**kwargs)
+        self._label.pack(side=tk.TOP)
+        self._widget_day.pack(side=tk.BOTTOM)
+
+    def get(self):
+        """Getter do objeto."""
+        return self._day.get()
+
 class ChooseData(object):
     """Componente para a escolha de datas"""
     def __init__(self, tela):
-        self.tela = tela
-        self._day = tk.StringVar()
-        self._widget_day = ttk.Combobox(self.tela, textvariable=self._day)
-        self._widget_day['values'] = [str(i) for i in range(1, 32)]
-    
-    def _configure_(self):
-        pass
+        self._frame = tk.Frame(tela)
+        self._dia = CustomCombobox(self._frame, 31, "Dia")
+        self._mes = CustomCombobox(self._frame, 12, "Mês")
+        self._ano = CustomCombobox(self._frame, 2017, "Ano")
+
+    def pack(self, **kwargs):
+        """Atalho para o gerênciador de geometria."""
+        self._frame.pack(**kwargs)
+        self._dia.pack(side=tk.LEFT)
+        self._mes.pack(side=tk.LEFT)
+        self._ano.pack(side=tk.LEFT)
+
+    def get(self):
+        """Getter do objeto."""
+        return "{dia}/{mes}/{ano}".format(dia=self._dia.get(),
+                                          mes=self._mes.get(),
+                                          ano=self._ano.get())
 
 
 class ChooseMenu(object):
