@@ -6,3 +6,6 @@
 
 # Ignorar os arquivos de cache do python.
 __pycache__/
+
+# Ignorar arquivos de teste.
+teste*

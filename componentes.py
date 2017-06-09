@@ -19,7 +19,6 @@ class CustomCombobox(object):
 
     def _configure_(self, range_limite):
         self._widget_day['values'] = [str(i) for i in range(range_limite, 0, -1)]
-        # self._widget_day.current(len(self._widget_day['values'])-1)
         self._widget_day.configure(width=5, justify=tk.CENTER)
 
     def pack(self, **kwargs):
@@ -58,7 +57,7 @@ class ChooseData(object):
         return "{dia}/{mes}/{ano}".format(dia=self._dia.get(), mes=self._mes.get(),
                                           ano=self._ano.get())
 
-    def set(self, data):
+    def set(self, data="//"):
         """Setter do objeto."""
         dia, mes, ano = data.split("/")
         self._dia.set(dia)
