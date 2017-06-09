@@ -18,7 +18,7 @@ class CustomCombobox(object):
         self._configure_(range_limite)
 
     def _configure_(self, range_limite):
-        self._widget_day['values'] = [str(i+1) for i in range(0, range_limite)]
+        self._widget_day['values'] = [str(i) for i in range(range_limite, 0, -1)]
         # self._widget_day.current(len(self._widget_day['values'])-1)
         self._widget_day.configure(width=5, justify=tk.CENTER)
 
