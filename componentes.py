@@ -3,8 +3,20 @@
 
 
 import tkinter as tk
+from tkinter import ttk
 import dafaults as tema
 from table import Tabela
+
+class ChooseData(object):
+    """Componente para a escolha de datas"""
+    def __init__(self, tela):
+        self.tela = tela
+        self._day = tk.StringVar()
+        self._widget_day = ttk.Combobox(self.tela, textvariable=self._day)
+        self._widget_day['values'] = [str(i) for i in range(1, 32)]
+    
+    def _configure_(self):
+        pass
 
 
 class ChooseMenu(object):
@@ -25,9 +37,9 @@ class ChooseMenu(object):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(bd=2, bg=tema.bg_borda)
         self.frame.configure(bd=10, bg=tema.bg_widget)
-        self.label.configure(tema.CHOOSE_LISTBOX)
+        self.label.configure(**tema.CHOOSE_LISTBOX) # Esse negocio num era pra ta aqui não...
         self.entry.configure(width=135, bg=tema.bg_widget,
-                             fg=tema.fg_widget, height=1, bd=2)
+                             fg=tema.fg_widget, height=1, bd=2, justify="center")
         self.opcoes.configure(width=12, **tema.CHOOSE_BUTTONS)
         self.opcoes.menu = tk.Menu(self.opcoes, tearoff=0)
         self.opcoes['menu'] = self.opcoes.menu
