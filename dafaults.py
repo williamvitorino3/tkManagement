@@ -32,6 +32,12 @@ BORDA = {
     "background": "#ffffff",
 }
 
+LABEL = {
+    "bg": "#eff0f1",
+    "fg": "#000000",
+    "width": 20
+}
+
 bg_borda = "#ffffff"
 bg_widget = "#eff0f1"
 # bg_widget = "#000000"

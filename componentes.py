@@ -19,7 +19,7 @@ class CustomCombobox(object):
 
     def _configure_(self, range_limite):
         self._widget_day['values'] = [str(i+1) for i in range(0, range_limite)]
-        self._widget_day.current(len(self._widget_day['values'])-1)
+        # self._widget_day.current(len(self._widget_day['values'])-1)
         self._widget_day.configure(width=5, justify=tk.CENTER)
 
     def pack(self, **kwargs):
@@ -32,10 +32,15 @@ class CustomCombobox(object):
         """Getter do objeto."""
         return self._day.get()
 
+    def set(self, valor):
+        """Eetter do objeto."""
+        self._day.set(valor)
+
 class ChooseData(object):
     """Componente para a escolha de datas"""
-    def __init__(self, tela):
+    def __init__(self, tela, text):
         self._frame = tk.Frame(tela)
+        self._label = tk.Label(self._frame, text=text, **tema.LABEL)
         self._dia = CustomCombobox(self._frame, 31, "Dia")
         self._mes = CustomCombobox(self._frame, 12, "Mês")
         self._ano = CustomCombobox(self._frame, 2017, "Ano")
@@ -43,15 +48,22 @@ class ChooseData(object):
     def pack(self, **kwargs):
         """Atalho para o gerênciador de geometria."""
         self._frame.pack(**kwargs)
+        self._label.pack(side=tk.LEFT)
         self._dia.pack(side=tk.LEFT)
         self._mes.pack(side=tk.LEFT)
         self._ano.pack(side=tk.LEFT)
 
     def get(self):
         """Getter do objeto."""
-        return "{dia}/{mes}/{ano}".format(dia=self._dia.get(),
-                                          mes=self._mes.get(),
+        return "{dia}/{mes}/{ano}".format(dia=self._dia.get(), mes=self._mes.get(),
                                           ano=self._ano.get())
+
+    def set(self, data):
+        """Setter do objeto."""
+        dia, mes, ano = data.split("/")
+        self._dia.set(dia)
+        self._mes.set(mes)
+        self._ano.set(ano)
 
 
 class ChooseMenu(object):
@@ -72,7 +84,7 @@ class ChooseMenu(object):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(bd=2, bg=tema.bg_borda)
         self.frame.configure(bd=10, bg=tema.bg_widget)
-        self.label.configure(**tema.CHOOSE_LISTBOX) # Esse negocio num era pra ta aqui não...
+        self.label.configure(**tema.LABEL)
         self.entry.configure(width=135, bg=tema.bg_widget,
                              fg=tema.fg_widget, height=1, bd=2, justify="center")
         self.opcoes.configure(width=12, **tema.CHOOSE_BUTTONS)
@@ -120,7 +132,7 @@ class TextBox(object):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(bd=2, bg=tema.bg_borda)
         self.frame.configure(bd=10, bg=tema.bg_widget)
-        self.label.configure(bg=tema.bg_widget, fg=tema.fg_widget, width=20)
+        self.label.configure(**tema.LABEL)
         self.entry.configure(**tema.ENTRY_TEXT)
 
     def pack(self, side=tk.TOP):
@@ -153,7 +165,7 @@ class SearchBox(object):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(**tema.BORDA)
         self.frame.configure(bd=10, bg=tema.bg_widget)
-        self.label.configure(bg=tema.bg_widget, fg=tema.fg_widget, width=20)
+        self.label.configure(**tema.LABEL)
         self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
                              fg=tema.fg_widget,
                              insertbackground=tema.insert_bg)
