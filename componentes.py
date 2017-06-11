@@ -91,8 +91,8 @@ class ChooseMenu(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(bd=2, bg=tema.bg_borda)
-        self.frame.configure(bd=10, bg=tema.bg_widget)
+        self.frame_bd.configure(**tema.BORDA)
+        self.frame.configure(**tema.FRAME)
         self.label.configure(**tema.LABEL)
         self.entry.configure(width=135, bg=tema.bg_widget,
                              fg=tema.fg_widget, height=1, bd=2, justify="center")
@@ -132,15 +132,14 @@ class TextBox(object):
         self.frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self.frame_bd)
         # self.frame = tk.Frame(tela, bd=10)
-        self.length_line = tela.winfo_screenwidth()
         self.label = tk.Label(self.frame, text=text)
         self.entry = tk.Entry(self.frame)
         self._configure_()
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(bd=2, bg=tema.bg_borda)
-        self.frame.configure(bd=10, bg=tema.bg_widget)
+        self.frame_bd.configure(**tema.BORDA)
+        self.frame.configure(**tema.FRAME)
         self.label.configure(**tema.LABEL)
         self.entry.configure(**tema.ENTRY_TEXT)
 
@@ -155,6 +154,10 @@ class TextBox(object):
         """Substituição do método insert()."""
         self.entry.insert(0, args)
 
+    def get(self):
+        """Substituição do método get()."""
+        return self.entry.get()
+
 
 class SearchBox(object):
     u"""Implementação de um box com Label e Enty."""
@@ -163,8 +166,6 @@ class SearchBox(object):
         """Construtor da classe."""
         self.frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self.frame_bd)
-        # self.frame = tk.Frame(tela, bd=10)
-        self.length_line = tela.winfo_screenwidth()
         self.label = tk.Label(self.frame, text=text)
         self.entry = tk.Entry(self.frame)
         self.button = tk.Button(self.frame)
@@ -173,11 +174,12 @@ class SearchBox(object):
     def _configure_(self):
         """Configura os Widgets do Componente."""
         self.frame_bd.configure(**tema.BORDA)
-        self.frame.configure(bd=10, bg=tema.bg_widget)
+        self.frame.configure(**tema.FRAME)
         self.label.configure(**tema.LABEL)
-        self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
+        self.entry.configure(**tema.ENTRY_TEXT)
+        """self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
                              fg=tema.fg_widget,
-                             insertbackground=tema.insert_bg)
+                             insertbackground=tema.insert_bg)"""
         self.button.configure(text="Pesquisar", width=10, bg=tema.bg_widget,
                               fg=tema.fg_widget)
 
@@ -206,7 +208,7 @@ class Lista(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(bd=2, bg=tema.bg_borda)
+        self.frame_bd.configure(**tema.BORDA)
         self.frame_buttons.configure(bg=tema.bg_widget)
         self.label.configure(width=170, text="Clientes", bg=tema.bg_widget,
                              fg=tema.fg_widget)
@@ -216,7 +218,7 @@ class Lista(object):
                                      fg=tema.fg_widget)
         self.edit_button.configure(text="Editar", bg=tema.bg_widget,
                                    fg=tema.fg_widget)
-        self.frame.configure(bd=10, bg=tema.bg_widget)
+        self.frame.configure(**tema.FRAME)
         for item in self.list.colunas:
             self.list.colunas[item].lista.configure(justify=tema.justify_text,
                                                     bg=tema.bg_widget, bd=2,

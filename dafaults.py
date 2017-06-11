@@ -38,6 +38,11 @@ LABEL = {
     "width": 20
 }
 
+FRAME = {
+    "bd": 10,
+    "bg": "#eff0f1"
+}
+
 bg_borda = "#ffffff"
 bg_widget = "#eff0f1"
 # bg_widget = "#000000"

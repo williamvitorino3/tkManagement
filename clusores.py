@@ -3,7 +3,7 @@
 
 from tkinter import messagebox as msg
 
-def valida_remocao(func):
+def remocao(func):
     """Valida a remoção de um cliente."""
     def questionar(self):
         """Pergunta se deve remover."""
@@ -11,12 +11,12 @@ def valida_remocao(func):
             func(self)
     return questionar
 
-def valida_insercao(func):
+def insercao(func):
     """Clusore de validação."""
-    def valida_campos_vazios(self):
+    def campos_vazios(self):
         """Valida os campos de texto."""
         if not self.nome.entry.get():
-            a = msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
+            msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
             return
         if self.data_nasc.get() == "//":
             msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em vazio.")
@@ -27,4 +27,4 @@ def valida_insercao(func):
             msg.showerror("Erro de validação", "Campo \"Tipo de Atendimento\" não seleionado.")
             return
         func(self)
-    return valida_campos_vazios
+    return campos_vazios
