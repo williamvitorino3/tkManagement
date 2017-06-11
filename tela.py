@@ -7,7 +7,6 @@ import componentes as wid
 import cliente_db as db
 # TODO: Adicionar confirmação da remoção.
 # TODO: Quantos dias a pessoas esta cadastrada.
-# TODO: Implementar um componente de data.
 
 
 class Janela(object):
