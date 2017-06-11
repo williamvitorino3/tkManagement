@@ -14,12 +14,16 @@ class CustomCombobox(object):
         self.frame = tk.Frame(tela)
         self._label = tk.Label(self.frame, text=text)
         self._day = tk.StringVar()
-        self._widget_day = ttk.Combobox(self.frame, textvariable=self._day)
+        self._widget_day = ttk.Combobox(self.frame, textvariable=self._day, state="readonly")
         self._configure_(range_limite)
 
     def _configure_(self, range_limite):
         self._widget_day['values'] = [str(i) for i in range(range_limite, 0, -1)]
         self._widget_day.configure(width=5, justify=tk.CENTER)
+
+    def configure(self, **kwargs):
+        """Atalho para o método configure."""
+        self._widget_day.configure(**kwargs)
 
     def pack(self, **kwargs):
         """Atalho para o gerênciador de geometria."""
@@ -43,6 +47,12 @@ class ChooseData(object):
         self._dia = CustomCombobox(self._frame, 31, "Dia")
         self._mes = CustomCombobox(self._frame, 12, "Mês")
         self._ano = CustomCombobox(self._frame, 2017, "Ano")
+
+    def configure(self, width=15):
+        """implementação do método de configuração."""
+        self._dia.configure(width=int(width//3))
+        self._mes.configure(width=int(width//3))
+        self._ano.configure(width=int(width//3))
 
     def pack(self, **kwargs):
         """Atalho para o gerênciador de geometria."""

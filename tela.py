@@ -18,8 +18,8 @@ class Janela(object):
         self.janela = tk.Frame(root)
         self.frame_dados_cliente = tk.Frame(self.janela)
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
-        self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
-        self.data_nasc.entry.configure(width=60)
+        self.data_nasc = wid.ChooseData(self.frame_dados_cliente, text="Data Nascimento")
+        self.data_nasc.configure(width=60)
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
                                           text="Tipo de Atendimento")
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
@@ -63,7 +63,7 @@ class Janela(object):
 
     def adicionar(self):
         """Adiciona os dados dos campon no banco."""
-        db.inserir(self.nome.entry.get(), self.data_nasc.entry.get(), # TODO: Ajustar o Get.
+        db.inserir(self.nome.entry.get(), self.data_nasc.get(),
                    self.atendimento.get())
         self._limpar_entradas_()
         self.atualizar()
@@ -88,7 +88,7 @@ class Janela(object):
     def _limpar_entradas_(self):
         """Limpa os campos de preenchimento."""
         self.nome.entry.delete(0, tk.END)
-        self.data_nasc.entry.delete(0, tk.END) # TODO: Implementar esse método.
+        self.data_nasc.set()
         self.atendimento.entry.delete(0, tk.END)
 
     def _edicao_(self):
@@ -110,7 +110,7 @@ class Janela(object):
     def update(self):
         """Atualiza os dados do cliente no Banco de Dados."""
         db.atualizar(self._lest_id_, self.nome.entry.get(),
-                     self.data_nasc.entry.get(), self.atendimento.get()) # TODO: Atualizar o get.
+                     self.data_nasc.get(), self.atendimento.get())
         self._edicao_()
         self._limpar_entradas_()
         self.atualizar()
@@ -123,5 +123,5 @@ class Janela(object):
             pos = int(i)
             self._lest_id_ = self.clientes[pos][0]
             self.nome.entry.insert(0, self.clientes[pos][1])
-            self.data_nasc.entry.insert(0, self.clientes[pos][3]) # TODO: Mudar para o Set.
+            self.data_nasc.set(self.clientes[pos][3])
             self.atendimento.entry.insert(0, self.clientes[pos][4])
