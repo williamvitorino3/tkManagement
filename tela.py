@@ -2,10 +2,10 @@
 
 u"""Implementação da tela principal do projeto."""
 
+from datetime import datetime
 import tkinter as tk
 import componentes as wid
 import cliente_db as db
-from datetime import datetime
 # TODO: Adicionar confirmação da remoção.
 
 
