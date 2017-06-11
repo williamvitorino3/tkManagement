@@ -3,10 +3,10 @@
 u"""Implementação da tela principal do projeto."""
 
 from datetime import datetime
+import clusores
 import tkinter as tk
 import componentes as wid
 import cliente_db as db
-# TODO: Adicionar confirmação da remoção.
 
 
 class Janela(object):
@@ -61,7 +61,7 @@ class Janela(object):
         self.clientes = db.buscar_all()
         self.set_clientes()
 
-    @valida_insercao
+    @clusores.valida_insercao
     def adicionar(self):
         """Adiciona os dados dos campon no banco."""
         db.inserir(self.nome.entry.get(), self.data_nasc.get(),
@@ -69,6 +69,7 @@ class Janela(object):
         self._limpar_entradas_()
         self.atualizar()
 
+    @clusores.valida_remocao
     def remover(self):
         """Deleta os itens selecionados."""
         pos = 0
