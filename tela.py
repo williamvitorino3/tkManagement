@@ -5,8 +5,8 @@ u"""Implementação da tela principal do projeto."""
 import tkinter as tk
 import componentes as wid
 import cliente_db as db
+from datetime import datetime
 # TODO: Adicionar confirmação da remoção.
-# TODO: Quantos dias a pessoas esta cadastrada.
 
 
 class Janela(object):
@@ -54,6 +54,7 @@ class Janela(object):
             self.lista_clientes.insert("Último Atendimento", cliente[2])
             self.lista_clientes.insert("Data Nascimento", cliente[3])
             self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
+            self.lista_clientes.insert("Cadastrado à", self._ultima_consulta_(cliente))
 
     def _pesquisa_init_(self):
         """Pesquisa inicial da tela."""
@@ -91,6 +92,10 @@ class Janela(object):
         self.atendimento.entry.delete(0, tk.END)
 
     def _edicao_(self):
+        """
+        Faz a atualização da tela,  necesária para a edição
+        de um paciente.
+        """
         if self.lista_clientes.add_button["text"] == "Cadastrar":
             self.lista_clientes.add_button.configure(text="Atualizar",
                                                      command=self.update)
@@ -124,3 +129,13 @@ class Janela(object):
             self.nome.entry.insert(0, self.clientes[pos][1])
             self.data_nasc.set(self.clientes[pos][3])
             self.atendimento.entry.insert(0, self.clientes[pos][4])
+
+    def _ultima_consulta_(self, cliente):
+        """
+        Calcula a quantidade de dias do ultima
+        consulta do cliente.
+        """
+        dia, mes, ano = cliente[2].split('/')
+        tempo = datetime.now() - datetime(int(ano), int(mes), int(dia))
+        return "%d dia%s" %(tempo.days, "" if tempo.days == 1 else "s")
+            
