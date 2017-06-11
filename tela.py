@@ -6,26 +6,8 @@ from datetime import datetime
 import tkinter as tk
 import componentes as wid
 import cliente_db as db
-from tkinter import messagebox as msg
 # TODO: Adicionar confirmação da remoção.
 
-def valida_insercao(func):
-    """Clusore de validação."""
-    def valida_campos_vazios(self):
-        """Valida os campos de texto."""
-        if not self.nome.entry.get():
-            msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
-            return
-        if self.data_nasc.get() == "//":
-            msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em vazio.")
-            return
-        try:
-            self.atendimento.get()
-        except IndexError:
-            msg.showerror("Erro de validação", "Campo \"Tipo de Atendimento\" não seleionado.")
-            return
-        func(self)
-    return valida_campos_vazios
 
 class Janela(object):
     u"""Implementação da janela."""
