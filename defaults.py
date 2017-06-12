@@ -29,13 +29,14 @@ ENTRY_TEXT = {
 
 BORDA = {
     "bd": 2,
-    "background": "#000000",
+    "background": "#ffffff",
 }
 
 LABEL = {
     "bg": "#eff0f1",
     "fg": "#000000",
-    "width": 15
+    "width": 15,
+    "relief": "flat",
 }
 
 FRAME = {

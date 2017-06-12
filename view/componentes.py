@@ -1,6 +1,11 @@
 """Pacote com componentes customizados."""
 # -*- coding: utf-8 -*-
 
+# TODO: Utilizar Combobox no Atendimento.
+# TODO: Voltar a data para TextBox.
+# TODO: Habilitar eventos para o Enter.
+# TODO: Implementar mensagens de Sucesso.
+# Por pesquisa depois dos botões.
 
 from tkinter import ttk
 from view.table import Tabela

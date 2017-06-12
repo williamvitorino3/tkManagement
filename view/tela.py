@@ -3,8 +3,8 @@
 u"""Implementação da tela principal do projeto."""
 
 from datetime import datetime
-from view import componentes as wid # Pesquisar [pylint] E0401
 from model import cliente_db as db
+from view import componentes as wid
 import clusores as validacao
 import tkinter as tk
 import defaults as style
