@@ -11,8 +11,7 @@ import defaults as style
 
 # TODO: Voltar a data para TextBox.
 # TODO: Habilitar eventos para o Enter.
-# TODO: Implementar mensagens de Sucesso.
-# Por pesquisa depois dos botões.
+# TODO: Por pesquisa depois dos botões.
 
 
 class Janela(object):
@@ -67,6 +66,7 @@ class Janela(object):
         self.clientes = db.buscar_all()
         self.set_clientes()
 
+    @validacao.successful
     @validacao.insercao
     def adicionar(self):
         """Adiciona os dados dos campon no banco."""
@@ -75,6 +75,7 @@ class Janela(object):
         self._limpar_entradas_()
         self.atualizar()
 
+    @validacao.successful
     @validacao.remocao
     def remover(self):
         """Deleta os itens selecionados."""
@@ -111,6 +112,7 @@ class Janela(object):
             self.lista_clientes.add_button.configure(text="Cadastrar",
                                                      command=self.adicionar)
 
+    @validacao.successful
     def pesquisar(self):
         """Pesquisa clientes no banco."""
         self.lista_clientes.reset()

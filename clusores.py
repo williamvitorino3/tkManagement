@@ -28,3 +28,11 @@ def insercao(func):
             return
         func(self)
     return campos_vazios
+
+def successful(func):
+    """Exibe mensagem de sucesso após a operação."""
+    def callback(*args):
+        """Chama a função"""
+        func(*args)
+        msg.showinfo("Sucesso", "Operação realizada com sucesso.")
+    return callback
