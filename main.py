@@ -1,5 +1,5 @@
 import tkinter as tk
-from tela import Janela
+from view.tela import Janela
 
 
 root = tk.Tk()

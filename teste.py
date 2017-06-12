@@ -1,4 +1,4 @@
-from componentes import ChooseData
+from view.componentes import ChooseData
 import tkinter as tk
 
 win = tk.Tk()

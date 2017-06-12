@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-import tkinter as tk
 from tkinter import ttk
-import dafaults as tema
-from table import Tabela
+from view.table import Tabela
+import tkinter as tk
+import defaults as style
 
 
 class CustomCombobox(object):
@@ -13,37 +13,39 @@ class CustomCombobox(object):
     def __init__(self, tela, range_limite, text):
         self.frame = tk.Frame(tela)
         self._label = tk.Label(self.frame, text=text)
-        self._day = tk.StringVar()
-        self._widget_day = ttk.Combobox(self.frame, textvariable=self._day, state="readonly")
+        self._var = tk.StringVar()
+        self._widget = ttk.Combobox(self.frame, textvariable=self._var)
         self._configure_(range_limite)
 
     def _configure_(self, range_limite):
-        self._widget_day['values'] = [str(i) for i in range(range_limite, 0, -1)]
-        self._widget_day.configure(width=5, justify=tk.CENTER)
+        self.frame.configure(**style.FRAME)
+        self._widget['values'] = [str(i) for i in range(range_limite, 0, -1)]
+        self._widget.configure(**style.COMBOBOX)
 
     def configure(self, **kwargs):
         """Atalho para o método configure."""
-        self._widget_day.configure(**kwargs)
+        self._widget.configure(**kwargs)
 
     def pack(self, **kwargs):
         """Atalho para o gerênciador de geometria."""
         self.frame.pack(**kwargs)
-        self._label.pack(side=tk.TOP)
-        self._widget_day.pack(side=tk.BOTTOM)
+        self._label.pack()
+        self._widget.pack()
 
     def get(self):
         """Getter do objeto."""
-        return self._day.get()
+        return self._var.get()
 
     def set(self, valor):
         """Eetter do objeto."""
-        self._day.set(valor)
+        self._var.set(valor)
 
 class ChooseData(object):
     """Componente para a escolha de datas"""
     def __init__(self, tela, text):
-        self._frame = tk.Frame(tela)
-        self._label = tk.Label(self._frame, text=text, **tema.LABEL)
+        self._frame_bd = tk.Frame(tela, **style.BORDA)
+        self._frame = tk.Frame(self._frame_bd)
+        self._label = tk.Label(self._frame, text=text, **style.LABEL)
         self._dia = CustomCombobox(self._frame, 31, "Dia")
         self._mes = CustomCombobox(self._frame, 12, "Mês")
         self._ano = CustomCombobox(self._frame, 2017, "Ano")
@@ -56,7 +58,8 @@ class ChooseData(object):
 
     def pack(self, **kwargs):
         """Atalho para o gerênciador de geometria."""
-        self._frame.pack(**kwargs)
+        self._frame_bd.pack(**kwargs)
+        self._frame.pack()
         self._label.pack(side=tk.LEFT)
         self._dia.pack(side=tk.LEFT)
         self._mes.pack(side=tk.LEFT)
@@ -80,8 +83,8 @@ class ChooseMenu(object):
 
     def __init__(self, tela, text):
         """Construtor da classe."""
-        self.frame_bd = tk.Frame(tela)
-        self.frame = tk.Frame(self.frame_bd)
+        self._frame_bd = tk.Frame(tela)
+        self.frame = tk.Frame(self._frame_bd)
         self.opcao = tk.StringVar()
         self.label = tk.Label(self.frame, text=text)
         self.escolha = tk.StringVar()
@@ -91,17 +94,16 @@ class ChooseMenu(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(**tema.BORDA)
-        self.frame.configure(**tema.FRAME)
-        self.label.configure(**tema.LABEL)
-        self.entry.configure(width=135, bg=tema.bg_widget,
-                             fg=tema.fg_widget, height=1, bd=2, justify="center")
-        self.opcoes.configure(width=12, **tema.CHOOSE_BUTTONS)
+        self._frame_bd.configure(**style.BORDA)
+        self.frame.configure(**style.FRAME)
+        self.label.configure(**style.LABEL)
+        self.entry.configure(**style.CHOOSE_LISTBOX)
+        self.opcoes.configure(width=12, **style.CHOOSE_BUTTONS)
         self.opcoes.menu = tk.Menu(self.opcoes, tearoff=0)
         self.opcoes['menu'] = self.opcoes.menu
-        for atendimento in tema.ATENDIMENTOS:
+        for atendimento in style.ATENDIMENTOS:
             self.insert_option(atendimento)
-        self.opcoes.menu.configure(**tema.CHOOSE_BUTTONS)
+        self.opcoes.menu.configure(**style.CHOOSE_BUTTONS)
 
     def set(self, item):
         """Setter da classe."""
@@ -109,10 +111,10 @@ class ChooseMenu(object):
 
     def pack(self, **kwargs):
         u"""Substituição do método pack()."""
-        self.frame_bd.pack(**kwargs)
-        self.frame.pack()
-        self.label.pack(side=tk.LEFT)
-        self.opcoes.pack(side=tk.RIGHT)
+        self._frame_bd.pack(**kwargs)
+        self.frame.pack(padx=2)
+        self.label.pack(side=tk.LEFT, pady=9)
+        self.opcoes.pack(side=tk.RIGHT, padx=1)
         self.entry.pack(side=tk.LEFT)
 
     def get(self):
@@ -129,8 +131,8 @@ class TextBox(object):
 
     def __init__(self, tela, text):
         """Construtor da classe."""
-        self.frame_bd = tk.Frame(tela)
-        self.frame = tk.Frame(self.frame_bd)
+        self._frame_bd = tk.Frame(tela)
+        self.frame = tk.Frame(self._frame_bd)
         # self.frame = tk.Frame(tela, bd=10)
         self.label = tk.Label(self.frame, text=text)
         self.entry = tk.Entry(self.frame)
@@ -138,14 +140,14 @@ class TextBox(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(**tema.BORDA)
-        self.frame.configure(**tema.FRAME)
-        self.label.configure(**tema.LABEL)
-        self.entry.configure(**tema.ENTRY_TEXT)
+        self._frame_bd.configure(**style.BORDA)
+        self.frame.configure(**style.FRAME)
+        self.label.configure(**style.LABEL)
+        self.entry.configure(**style.ENTRY_TEXT)
 
     def pack(self, side=tk.TOP):
         u"""Substituição do método pack()."""
-        self.frame_bd.pack(side=side)
+        self._frame_bd.pack(side=side)
         self.frame.pack()
         self.label.pack(side=tk.LEFT)
         self.entry.pack(side=tk.RIGHT)
@@ -164,8 +166,8 @@ class SearchBox(object):
 
     def __init__(self, tela, text):
         """Construtor da classe."""
-        self.frame_bd = tk.Frame(tela)
-        self.frame = tk.Frame(self.frame_bd)
+        self._frame_bd = tk.Frame(tela)
+        self.frame = tk.Frame(self._frame_bd)
         self.label = tk.Label(self.frame, text=text)
         self.entry = tk.Entry(self.frame)
         self.button = tk.Button(self.frame)
@@ -173,23 +175,20 @@ class SearchBox(object):
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(**tema.BORDA)
-        self.frame.configure(**tema.FRAME)
-        self.label.configure(**tema.LABEL)
-        self.entry.configure(**tema.ENTRY_TEXT)
-        """self.entry.configure(justify=tk.LEFT, width=135, bg=tema.bg_widget,
-                             fg=tema.fg_widget,
-                             insertbackground=tema.insert_bg)"""
-        self.button.configure(text="Pesquisar", width=10, bg=tema.bg_widget,
-                              fg=tema.fg_widget)
+        self._frame_bd.configure(**style.BORDA)
+        self.frame.configure(**style.FRAME)
+        self.label.configure(**style.LABEL)
+        self.entry.configure(**style.ENTRY_TEXT)
+        self.button.configure(text="Pesquisar", **style.BUTTON)
+        self.entry.configure(width=(style.ENTRY_TEXT["width"]-14))
 
     def pack(self, **kwargs):
         """Substituição do método pack()."""
-        self.frame_bd.pack(**kwargs)
+        self._frame_bd.pack(**kwargs)
         self.frame.pack()
         self.label.pack(side=tk.LEFT)
         self.button.pack(side=tk.RIGHT)
-        self.entry.pack(side=tk.RIGHT)
+        self.entry.pack(side=tk.RIGHT, padx=2)
 
 
 class Lista(object):
@@ -197,44 +196,37 @@ class Lista(object):
 
     def __init__(self, tela):
         """Construtor da classe."""
-        self.frame_bd = tk.Frame(tela)
-        self.frame_buttons = tk.Frame(self.frame_bd)
-        self.label = tk.Label(self.frame_buttons)
+        self._frame_bd = tk.Frame(tela, **style.BORDA)
+        self.frame_buttons = tk.Frame(self._frame_bd)
+        self.label = tk.Label(self.frame_buttons, **style.LABEL)
         self.add_button = tk.Button(self.frame_buttons)
         self.remove_button = tk.Button(self.frame_buttons)
         self.edit_button = tk.Button(self.frame_buttons)
-        self.frame = tk.Frame(self.frame_bd)
+        self.frame = tk.Frame(self._frame_bd)
         self.list = Tabela(self.frame)
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
-        self.frame_bd.configure(**tema.BORDA)
-        self.frame_buttons.configure(bg=tema.bg_widget)
-        self.label.configure(width=170, text="Clientes", bg=tema.bg_widget,
-                             fg=tema.fg_widget)
-        self.add_button.configure(text="Cadastrar", bg=tema.bg_widget,
-                                  fg=tema.fg_widget)
-        self.remove_button.configure(text="Remover", bg=tema.bg_widget,
-                                     fg=tema.fg_widget)
-        self.edit_button.configure(text="Editar", bg=tema.bg_widget,
-                                   fg=tema.fg_widget)
-        self.frame.configure(**tema.FRAME)
+        self._frame_bd.configure()
+        self.frame_buttons.configure(bg=style.bg_widget)
+        self.label.configure(text="Clientes", width=168)
+        self.add_button.configure(text="Cadastrar", **style.BUTTON)
+        self.remove_button.configure(text="Remover", **style.BUTTON)
+        self.edit_button.configure(text="Editar", **style.BUTTON)
+        self.frame.configure(**style.FRAME)
         for item in self.list.colunas:
-            self.list.colunas[item].lista.configure(justify=tema.justify_text,
-                                                    bg=tema.bg_widget, bd=2,
-                                                    selectmode=tk.EXTENDED,
-                                                    fg=tema.fg_widget)
+            self.list.colunas[item].lista.configure(**style.COLUN_LIST)
 
     def pack(self, **kwargs):
         u"""Substituição do método pack()."""
         self._configure_()
-        self.frame_bd.pack(**kwargs)
+        self._frame_bd.pack(**kwargs)
         self.label.pack()
         self.frame_buttons.pack()
-        self.add_button.pack(side=tk.LEFT)
-        self.edit_button.pack(side=tk.LEFT)
-        self.remove_button.pack(side=tk.RIGHT)
-        self.list.pack(side=tk.RIGHT, fill=tk.Y)
+        self.add_button.pack(side=tk.LEFT, padx=5)
+        self.edit_button.pack(side=tk.LEFT, padx=5)
+        self.remove_button.pack(side=tk.RIGHT, padx=5)
+        self.list.pack(side=tk.RIGHT, fill=tk.Y, padx=2)
         self.frame.pack()
 
     def insert(self, *args):

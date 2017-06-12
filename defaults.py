@@ -6,7 +6,7 @@ CHOOSE_BUTTONS = {
     "foreground": "#000000",
     "activebackground": "#eff0f1",
     "activeforeground": "#000000",
-    "relief": "raised",
+    "relief": "solid",
     "disabledforeground": "#000000"
 }
 
@@ -14,7 +14,7 @@ CHOOSE_LISTBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "width": 20,
+    "width": 58,
     "height": 1,
     "bd": 2
 }
@@ -35,7 +35,7 @@ BORDA = {
 LABEL = {
     "bg": "#eff0f1",
     "fg": "#000000",
-    "width": 20
+    "width": 15
 }
 
 FRAME = {
@@ -43,7 +43,27 @@ FRAME = {
     "bg": "#eff0f1"
 }
 
-bg_borda = "#ffffff"
+BUTTON = {
+    "width": 10,
+    "bg": "#eff0f1",
+    "fg": "#000000",
+    "relief": "solid"
+}
+
+COLUN_LIST = {
+    "justify": "center",
+    "bg": "#eff0f1",
+    "bd": 2,
+    "selectmode": "extended",
+    "fg": "#000000"
+}
+
+COMBOBOX = {
+    "width": 4,
+    "justify": "center",
+    "state": "readonly"
+}
+
 bg_widget = "#eff0f1"
 # bg_widget = "#000000"
 fg_widget = "#000000"

@@ -3,10 +3,11 @@
 u"""Implementação da tela principal do projeto."""
 
 from datetime import datetime
+from view import componentes as wid # Pesquisar [pylint] E0401
+from model import cliente_db as db
 import clusores as validacao
 import tkinter as tk
-import componentes as wid
-import cliente_db as db
+import defaults as style
 
 
 class Janela(object):
@@ -14,13 +15,13 @@ class Janela(object):
 
     def __init__(self, root):
         """Construtor da classe."""
-        self.janela = tk.Frame(root)
-        self.frame_dados_cliente = tk.Frame(self.janela)
+        self.janela = tk.Frame(root, **style.BORDA)
+        self.frame_dados_cliente = tk.Frame(self.janela, **style.BORDA)
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
         self.data_nasc = wid.ChooseData(self.frame_dados_cliente, text="Data Nascimento")
-        self.data_nasc.configure(width=60)
+        self.data_nasc.configure(width=50)
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
-                                          text="Tipo de Atendimento")
+                                          text="Atendimento")
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
         self.lista_clientes = wid.Lista(self.janela)
         self.clientes = []
