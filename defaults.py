@@ -29,7 +29,7 @@ ENTRY_TEXT = {
 
 BORDA = {
     "bd": 2,
-    "background": "#ffffff",
+    "background": "#000000",
 }
 
 LABEL = {

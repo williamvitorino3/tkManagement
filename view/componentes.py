@@ -222,7 +222,7 @@ class Lista(object):
         self._configure_()
         self._frame_bd.pack(**kwargs)
         self.label.pack()
-        self.frame_buttons.pack()
+        self.frame_buttons.pack(padx=2)
         self.add_button.pack(side=tk.LEFT, padx=5)
         self.edit_button.pack(side=tk.LEFT, padx=5)
         self.remove_button.pack(side=tk.RIGHT, padx=5)
