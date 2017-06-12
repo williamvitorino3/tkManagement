@@ -179,6 +179,33 @@ class SearchBox(object):
         self.button.pack(side=tk.RIGHT)
         self.entry.pack(side=tk.RIGHT, padx=2)
 
+class FrameButtons(object):
+    """Implementa uma lista de botões."""
+
+    def __init__(self, tela):
+        """Construtor da classe."""
+        self._frame_bd = tk.Frame(tela, **style.BORDA)
+        self.frame = tk.Frame(self._frame_bd)
+        self.label = tk.Label(self.frame, **style.LABEL)
+        self.add_button = tk.Button(self.frame)
+        self.edit_button = tk.Button(self.frame)
+        self.remove_button = tk.Button(self.frame)
+
+    def _configure_(self):
+        self.label.configure(width=168)
+        self.add_button.configure(text="Cadastrar", **style.BUTTON)
+        self.remove_button.configure(text="Remover", **style.BUTTON)
+        self.edit_button.configure(text="Editar", **style.BUTTON)
+
+    def pack(self, **kwargs):
+        """Atalho para o gerênciador de geometria Pack."""
+        self._configure_()
+        self._frame_bd.pack(**kwargs)
+        self.frame.pack()
+        self.label.pack()
+        self.add_button.pack(side=tk.LEFT, padx=5)
+        self.edit_button.pack(side=tk.LEFT, padx=5)
+        self.remove_button.pack(side=tk.RIGHT, padx=5)
 
 class Lista(object):
     """Implementa uma lista de atributos."""
@@ -187,10 +214,6 @@ class Lista(object):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self.frame_buttons = tk.Frame(self._frame_bd)
-        self.label = tk.Label(self.frame_buttons, **style.LABEL)
-        self.add_button = tk.Button(self.frame_buttons)
-        self.remove_button = tk.Button(self.frame_buttons)
-        self.edit_button = tk.Button(self.frame_buttons)
         self.frame = tk.Frame(self._frame_bd)
         self.list = Tabela(self.frame)
 
@@ -198,10 +221,6 @@ class Lista(object):
         """Configura os Widgets do Componente."""
         self._frame_bd.configure()
         self.frame_buttons.configure(bg=style.bg_widget)
-        self.label.configure(text="Clientes", width=168)
-        self.add_button.configure(text="Cadastrar", **style.BUTTON)
-        self.remove_button.configure(text="Remover", **style.BUTTON)
-        self.edit_button.configure(text="Editar", **style.BUTTON)
         self.frame.configure(**style.FRAME)
         for item in self.list.colunas:
             self.list.colunas[item].lista.configure(**style.COLUN_LIST)
@@ -210,11 +229,7 @@ class Lista(object):
         u"""Substituição do método pack()."""
         self._configure_()
         self._frame_bd.pack(**kwargs)
-        self.label.pack()
         self.frame_buttons.pack(padx=2)
-        self.add_button.pack(side=tk.LEFT, padx=5)
-        self.edit_button.pack(side=tk.LEFT, padx=5)
-        self.remove_button.pack(side=tk.RIGHT, padx=5)
         self.list.pack(side=tk.RIGHT, fill=tk.Y, padx=2)
         self.frame.pack()
 

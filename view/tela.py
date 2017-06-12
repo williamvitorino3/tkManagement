@@ -11,8 +11,7 @@ import defaults as style
 
 # TODO: Voltar a data para TextBox.
 # TODO: Habilitar eventos para o Enter.
-# TODO: Por pesquisa depois dos botões.
-
+# Link sobre evento dos botoes: http://effbot.org/tkinterbook/widget.htm#Tkinter.Widget.event_add-method
 
 class Janela(object):
     u"""Implementação da janela."""
@@ -26,6 +25,7 @@ class Janela(object):
         self.data_nasc.configure(width=50)
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
                                           text="Atendimento")
+        self.botoes = wid.FrameButtons(self.janela)
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
         self.lista_clientes = wid.Lista(self.janela)
         self.clientes = []
@@ -39,15 +39,16 @@ class Janela(object):
         self.lista_clientes.list.add_colunm("Data Nascimento", width=32)
         self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=32)
         self.lista_clientes.list.add_colunm("Cadastrado à", width=32)
-        self.lista_clientes.add_button.configure(command=self.adicionar)
-        self.lista_clientes.remove_button.configure(command=self.remover)
-        self.lista_clientes.edit_button.configure(command=self.editar)
+        self.botoes.add_button.configure(command=self.adicionar)
+        self.botoes.remove_button.configure(command=self.remover)
+        self.botoes.edit_button.configure(command=self.editar)
         self.pesquisa.button.configure(command=self.pesquisar)
         self.janela.pack()
         self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
         self.data_nasc.pack(side=tk.LEFT)
         self.atendimento.pack(side=tk.LEFT)
+        self.botoes.pack(side=tk.TOP)
         self.pesquisa.pack(side=tk.TOP)
         self.lista_clientes.pack()
         self.atualizar()
@@ -98,19 +99,17 @@ class Janela(object):
         """Limpa os campos de preenchimento."""
         self.nome.entry.delete(0, tk.END)
         self.data_nasc.set()
-        self.atendimento.entry.delete(0, tk.END)
+        self.atendimento.set("")
 
     def _edicao_(self):
         """
         Faz a atualização da tela,  necesária para a edição
         de um paciente.
         """
-        if self.lista_clientes.add_button["text"] == "Cadastrar":
-            self.lista_clientes.add_button.configure(text="Atualizar",
-                                                     command=self.update)
-        elif self.lista_clientes.add_button["text"] == "Atualizar":
-            self.lista_clientes.add_button.configure(text="Cadastrar",
-                                                     command=self.adicionar)
+        if self.botoes.add_button["text"] == "Cadastrar":
+            self.botoes.add_button.configure(text="Atualizar", command=self.update)
+        elif self.botoes.add_button["text"] == "Atualizar":
+            self.botoes.add_button.configure(text="Cadastrar", command=self.adicionar)
 
     @validacao.successful
     def pesquisar(self):
@@ -121,6 +120,8 @@ class Janela(object):
         self.set_clientes()
         self.pesquisa.entry.delete(0, tk.END)
 
+    @validacao.successful
+    @validacao.insercao
     def update(self):
         """Atualiza os dados do cliente no Banco de Dados."""
         db.atualizar(self._lest_id_, self.nome.entry.get(),

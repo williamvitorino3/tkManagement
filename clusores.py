@@ -32,7 +32,7 @@ def insercao(func):
 def successful(func):
     """Exibe mensagem de sucesso após a operação."""
     def callback(*args):
-        """Chama a função"""
+        """Chama a função e mostra a mensagem de sucesso."""
         func(*args)
         msg.showinfo("Sucesso", "Operação realizada com sucesso.")
     return callback
