@@ -1,11 +1,6 @@
 """Pacote com componentes customizados."""
 # -*- coding: utf-8 -*-
 
-# TODO: Utilizar Combobox no Atendimento.
-# TODO: Voltar a data para TextBox.
-# TODO: Habilitar eventos para o Enter.
-# TODO: Implementar mensagens de Sucesso.
-# Por pesquisa depois dos botões.
 
 from tkinter import ttk
 from view.table import Tabela
@@ -93,8 +88,7 @@ class ChooseMenu(object):
         self.opcao = tk.StringVar()
         self.label = tk.Label(self.frame, text=text)
         self.escolha = tk.StringVar()
-        self.entry = tk.Listbox(self.frame, listvariable=self.escolha)
-        self.opcoes = tk.Menubutton(self.frame, text="Escolher")
+        self.entry = ttk.Combobox(self.frame, textvariable=self.escolha)
         self._configure_()
 
     def _configure_(self):
@@ -102,33 +96,23 @@ class ChooseMenu(object):
         self._frame_bd.configure(**style.BORDA)
         self.frame.configure(**style.FRAME)
         self.label.configure(**style.LABEL)
-        self.entry.configure(**style.CHOOSE_LISTBOX)
-        self.opcoes.configure(width=12, **style.CHOOSE_BUTTONS)
-        self.opcoes.menu = tk.Menu(self.opcoes, tearoff=0)
-        self.opcoes['menu'] = self.opcoes.menu
-        for atendimento in style.ATENDIMENTOS:
-            self.insert_option(atendimento)
-        self.opcoes.menu.configure(**style.CHOOSE_BUTTONS)
+        self.entry["values"] = style.ATENDIMENTOS
+        self.entry.configure(**style.CHOOSE_COMBOBOX)
 
     def set(self, item):
         """Setter da classe."""
-        self.escolha.set(item[0])
+        self.escolha.set(item)
 
     def pack(self, **kwargs):
         u"""Substituição do método pack()."""
         self._frame_bd.pack(**kwargs)
         self.frame.pack(padx=2)
         self.label.pack(side=tk.LEFT, pady=9)
-        self.opcoes.pack(side=tk.RIGHT, padx=1)
-        self.entry.pack(side=tk.LEFT)
+        self.entry.pack(side=tk.LEFT, padx=2)
 
     def get(self):
         """Devolve o valor da escolha."""
-        return self.escolha.get().split("'")[1]
-
-    def insert_option(self, label):
-        u"""Substituição do método insert()."""
-        self.opcoes.menu.add_radiobutton(label=label, variable=self.escolha)
+        return self.escolha.get()
 
 
 class TextBox(object):

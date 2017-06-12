@@ -10,13 +10,12 @@ CHOOSE_BUTTONS = {
     "disabledforeground": "#000000"
 }
 
-CHOOSE_LISTBOX = {
+CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "width": 58,
-    "height": 1,
-    "bd": 2
+    "width": 70,
+    "state": "readonly"
 }
 
 ENTRY_TEXT = {
@@ -29,7 +28,7 @@ ENTRY_TEXT = {
 
 BORDA = {
     "bd": 2,
-    "background": "#ffffff",
+    "background": "#000000",
 }
 
 LABEL = {

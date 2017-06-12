@@ -9,6 +9,11 @@ import clusores as validacao
 import tkinter as tk
 import defaults as style
 
+# TODO: Voltar a data para TextBox.
+# TODO: Habilitar eventos para o Enter.
+# TODO: Implementar mensagens de Sucesso.
+# Por pesquisa depois dos botões.
+
 
 class Janela(object):
     u"""Implementação da janela."""
@@ -131,7 +136,7 @@ class Janela(object):
             self._lest_id_ = self.clientes[pos][0]
             self.nome.entry.insert(0, self.clientes[pos][1])
             self.data_nasc.set(self.clientes[pos][3])
-            self.atendimento.entry.insert(0, self.clientes[pos][4])
+            self.atendimento.set(self.clientes[pos][4])
 
     def _ultima_consulta_(self, cliente):
         """
