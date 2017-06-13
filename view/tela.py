@@ -10,8 +10,7 @@ import tkinter as tk
 import defaults as style
 
 # TODO: Voltar a data para TextBox.
-# TODO: Habilitar eventos para o Enter.
-# Link sobre evento dos botoes: http://effbot.org/tkinterbook/widget.htm#Tkinter.Widget.event_add-method
+
 
 class Janela(object):
     u"""Implementação da janela."""
