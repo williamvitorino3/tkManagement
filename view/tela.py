@@ -43,6 +43,7 @@ class Janela(object):
         self.botoes.remove_button.configure(command=self.remover)
         self.botoes.edit_button.configure(command=self.editar)
         self.pesquisa.button.configure(command=self.pesquisar)
+        self.pesquisa.entry.bind("<Return>", self.pesquisar)
         self.janela.pack()
         self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
@@ -112,7 +113,7 @@ class Janela(object):
             self.botoes.add_button.configure(text="Cadastrar", command=self.adicionar)
 
     @validacao.successful
-    def pesquisar(self):
+    def pesquisar(self, event=None):
         """Pesquisa clientes no banco."""
         self.lista_clientes.reset()
         self.clientes.clear()
