@@ -1,7 +1,19 @@
 """Biblioteca de clusores."""
 # -*- coding: utf-8 -*-
-
+from datetime import date
 from tkinter import messagebox as msg
+
+
+def successful(func):
+    """Exibe mensagem de sucesso após a operação."""
+    def callback(*args):
+        """Chama a função e mostra a mensagem de sucesso."""
+        try:
+            func(*args)
+            msg.showinfo("Sucesso", "Operação realizada com sucesso.")
+        except Exception:
+            msg.showinfo("Falha", "Operação realizada com falhas.")
+    return callback
 
 def remocao(func):
     """Valida a remoção de um cliente."""
@@ -9,6 +21,9 @@ def remocao(func):
         """Pergunta se deve remover."""
         if msg.askyesno("Remover paciente", "Deseja remover o paciente?"):
             func(self)
+            msg.showinfo("Sucesso", "Operação realizada com sucesso.")
+        else:
+            msg.showinfo("Falha", "Operação não realizada.")
     return questionar
 
 def insercao(func):
@@ -18,21 +33,18 @@ def insercao(func):
         if not self.nome.entry.get():
             msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
             return
-        if self.data_nasc.get() == "//":
-            msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em vazio.")
+        try:
+            dia, mes, ano = self.data_nasc.get().split("/")
+            date(int(ano), int(mes), int(dia))
+        except ValueError:
+            msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em inválido.")
             return
         try:
-            self.atendimento.get()
+            if not self.atendimento.get():
+                raise IndexError
         except IndexError:
             msg.showerror("Erro de validação", "Campo \"Tipo de Atendimento\" não seleionado.")
             return
         func(self)
-    return campos_vazios
-
-def successful(func):
-    """Exibe mensagem de sucesso após a operação."""
-    def callback(*args):
-        """Chama a função e mostra a mensagem de sucesso."""
-        func(*args)
         msg.showinfo("Sucesso", "Operação realizada com sucesso.")
-    return callback
+    return campos_vazios

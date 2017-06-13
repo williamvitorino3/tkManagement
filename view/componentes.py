@@ -134,11 +134,11 @@ class TextBox(object):
         self.label.configure(**style.LABEL)
         self.entry.configure(**style.ENTRY_TEXT)
 
-    def pack(self, side=tk.TOP):
+    def pack(self, **kargs):
         u"""Substituição do método pack()."""
-        self._frame_bd.pack(side=side)
+        self._frame_bd.pack(**kargs)
         self.frame.pack()
-        self.label.pack(side=tk.LEFT)
+        self.label.pack(side=tk.LEFT, pady=9)
         self.entry.pack(side=tk.RIGHT)
 
     def insert(self, *args):

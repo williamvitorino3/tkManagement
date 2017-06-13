@@ -4,7 +4,7 @@ u"""Implementação da tela principal do projeto."""
 
 from datetime import datetime
 from model import cliente_db as db
-from view import componentes as wid
+import view.componentes as wid
 import clusores as validacao
 import tkinter as tk
 import defaults as style
@@ -20,10 +20,9 @@ class Janela(object):
         self.janela = tk.Frame(root, **style.BORDA)
         self.frame_dados_cliente = tk.Frame(self.janela, **style.BORDA)
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
-        self.data_nasc = wid.ChooseData(self.frame_dados_cliente, text="Data Nascimento")
-        self.data_nasc.configure(width=50)
-        self.atendimento = wid.ChooseMenu(self.frame_dados_cliente,
-                                          text="Atendimento")
+        self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
+        self.data_nasc.entry.configure(width=58)
+        self.atendimento = wid.ChooseMenu(self.frame_dados_cliente, text="Atendimento")
         self.botoes = wid.FrameButtons(self.janela)
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
         self.lista_clientes = wid.Lista(self.janela)
@@ -46,7 +45,7 @@ class Janela(object):
         self.janela.pack()
         self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
-        self.data_nasc.pack(side=tk.LEFT)
+        self.data_nasc.pack(side=tk.LEFT, padx=3)
         self.atendimento.pack(side=tk.LEFT)
         self.botoes.pack(side=tk.TOP)
         self.pesquisa.pack(side=tk.TOP)
@@ -67,16 +66,14 @@ class Janela(object):
         self.clientes = db.buscar_all()
         self.set_clientes()
 
-    @validacao.successful
     @validacao.insercao
     def adicionar(self):
         """Adiciona os dados dos campon no banco."""
-        db.inserir(self.nome.entry.get(), self.data_nasc.get(),
+        db.inserir(self.nome.entry.get(), self.data_nasc.entry.get(),
                    self.atendimento.get())
         self._limpar_entradas_()
         self.atualizar()
 
-    @validacao.successful
     @validacao.remocao
     def remover(self):
         """Deleta os itens selecionados."""
@@ -98,7 +95,7 @@ class Janela(object):
     def _limpar_entradas_(self):
         """Limpa os campos de preenchimento."""
         self.nome.entry.delete(0, tk.END)
-        self.data_nasc.set()
+        self.data_nasc.entry.delete(0, tk.END)
         self.atendimento.set("")
 
     def _edicao_(self):
@@ -108,8 +105,6 @@ class Janela(object):
         """
         if self.botoes.add_button["text"] == "Cadastrar":
             self.botoes.add_button.configure(text="Atualizar", command=self.update)
-        elif self.botoes.add_button["text"] == "Atualizar":
-            self.botoes.add_button.configure(text="Cadastrar", command=self.adicionar)
 
     @validacao.successful
     def pesquisar(self, event=None):
@@ -120,26 +115,29 @@ class Janela(object):
         self.set_clientes()
         self.pesquisa.entry.delete(0, tk.END)
 
-    @validacao.successful
     @validacao.insercao
     def update(self):
         """Atualiza os dados do cliente no Banco de Dados."""
         db.atualizar(self._lest_id_, self.nome.entry.get(),
-                     self.data_nasc.get(), self.atendimento.get())
-        self._edicao_()
+                     self.data_nasc.entry.get(), self.atendimento.get())
+        if self.botoes.add_button["text"] == "Atualizar":
+            self.botoes.add_button.configure(text="Cadastrar", command=self.adicionar)
         self._limpar_entradas_()
         self.atualizar()
 
     def editar(self):
         u"""Habilita para edição o cliente selecionado."""
-        self._limpar_entradas_()
-        self._edicao_()
-        for i in self.lista_clientes.list.curselection():
-            pos = int(i)
-            self._lest_id_ = self.clientes[pos][0]
-            self.nome.entry.insert(0, self.clientes[pos][1])
-            self.data_nasc.set(self.clientes[pos][3])
-            self.atendimento.set(self.clientes[pos][4])
+        try:
+            self._limpar_entradas_()
+            for i in self.lista_clientes.list.curselection():
+                pos = int(i)
+                self._lest_id_ = self.clientes[pos][0]
+                self.nome.entry.insert(0, self.clientes[pos][1])
+                self.data_nasc.entry.insert(0, self.clientes[pos][3])
+                self.atendimento.set(self.clientes[pos][4])
+            self._edicao_()
+        except TypeError:
+            pass
 
     def _ultima_consulta_(self, cliente):
         """
