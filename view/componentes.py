@@ -185,7 +185,7 @@ class FrameButtons(object):
     def __init__(self, tela):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela, **style.BORDA)
-        self.frame = tk.Frame(self._frame_bd)
+        self.frame = tk.Frame(self._frame_bd, **style.FRAME)
         self.label = tk.Label(self.frame, **style.LABEL)
         self.add_button = tk.Button(self.frame)
         self.edit_button = tk.Button(self.frame)
