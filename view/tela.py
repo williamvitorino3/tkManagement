@@ -9,7 +9,8 @@ import clusores as validacao
 import tkinter as tk
 import defaults as style
 
-# TODO: Voltar a data para TextBox.
+# TODO: Resolver problema do curselection.
+# TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.
 
 
 class Janela(object):
