@@ -17,11 +17,12 @@ class Coluna(object):
         """Construtor da classe."""
         self.janela = tk.Frame(master)
         self._cabecalho_ = tk.Label(self.janela, text=text)
-        self.lista = tk.Listbox(self.janela, bd=2, width=width)
+        self.lista = tk.Listbox(self.janela, bd=2, width=width, selectmode=tk.SINGLE, exportselection=False)
         self.rolagem = ttk.Scrollbar(self.janela, orient=tk.HORIZONTAL,
                                      command=self.lista.xview)
         self._cabecalho_.configure(width=width, bd=2, relief=tk.GROOVE)
         self.lista.configure(xscrollcommand=self.rolagem.set)
+        #self.lista.bind('<<ListboxSelect>>', self._selecionado_)
 
     def pack(self, **kwargs):
         """Empacota os Widgets na tela."""
@@ -29,6 +30,9 @@ class Coluna(object):
         self.rolagem.pack(side=tk.BOTTOM, fill=tk.X)
         self._cabecalho_.pack()
         self.lista.pack(side=tk.LEFT)
+
+    def _selecionado_(self, event):
+        print(event.widget.curselection())
 
 
 class Tabela(object):
@@ -41,6 +45,16 @@ class Tabela(object):
                                      command=self.mover)
         self.colunas = {}
 
+    def _selecionar_multiplos_(self, event, index=0):
+        try:
+            index = int(event.widget.curselection()[0])        
+        except IndexError:
+            pass
+        for coluna in self.colunas:
+            self.colunas[coluna].lista.select_clear(0, self.colunas[coluna].lista.size())
+            self.colunas[coluna].lista.see(index)
+            self.colunas[coluna].lista.selection_set(index, index)
+
     def mover(self, *args):
         """Move as Listbox no eixo Y."""
         for coluna in self.colunas:
@@ -51,6 +65,7 @@ class Tabela(object):
         self.colunas[text] = (Coluna(self.frame, text, width))
         self.colunas[text].lista.configure(yscrollcommand=self.rolagem.set)
         self.colunas[text].pack(side=tk.LEFT)
+        self.colunas[text].lista.bind('<<ListboxSelect>>', self._selecionar_multiplos_)
 
     def pack(self, **kwargs):
         """Empacota os Widgets na tela."""
@@ -74,7 +89,7 @@ class Tabela(object):
         u"""Devolve as posições selecionadas."""
         for coluna in self.colunas:
             if self.colunas[coluna].lista.curselection():
-                return self.colunas[coluna].lista.curselection()
+                return self.colunas[coluna].lista.curselection()[0]
 
     def delete(self, *args):
         """Deleta os itens da lista."""
