@@ -47,7 +47,7 @@ class Tabela(object):
 
     def _selecionar_multiplos_(self, event, index=0):
         try:
-            index = int(event.widget.curselection()[0])        
+            index = int(event.widget.curselection()[0])
         except IndexError:
             pass
         for coluna in self.colunas:
