@@ -34,10 +34,14 @@ def insercao(func):
             msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
             return
         try:
-            dia, mes, ano = self.data_nasc.get().split("/")
-            date(int(ano), int(mes), int(dia))
+            if len(self.data_nasc.get().split("/")[-1]) != 4:
+                raise AssertionError
+            date(*[int(i) for i in self.data_nasc.get().split("/")[::-1]])
         except ValueError:
             msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em inválido.")
+            return
+        except AssertionError:
+            msg.showerror("Erro de validação", "Ano deve ter 4 digitos.")
             return
         try:
             if not self.atendimento.get():

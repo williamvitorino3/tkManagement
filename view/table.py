@@ -89,7 +89,7 @@ class Tabela(object):
         u"""Devolve as posições selecionadas."""
         for coluna in self.colunas:
             if self.colunas[coluna].lista.curselection():
-                return self.colunas[coluna].lista.curselection()[0]
+                return self.colunas[coluna].lista.curselection()
 
     def delete(self, *args):
         """Deleta os itens da lista."""

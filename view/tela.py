@@ -58,9 +58,13 @@ class Janela(object):
         for cliente in self.clientes[::-1]:
             self.lista_clientes.insert("Nome", cliente[1])
             self.lista_clientes.insert("Último Atendimento", cliente[2])
-            self.lista_clientes.insert("Data Nascimento", cliente[3])
+            self.lista_clientes.insert("Data Nascimento", self._formata_data_(cliente[3]))
             self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
             self.lista_clientes.insert("Cadastrado à", self._ultima_consulta_(cliente))
+
+    def _formata_data_(self, data):
+        """Formata a data no formato dd/mm/yyy"""
+        return "{0:02d}/{1:02d}/{2:04d}".format(*map(int, data.split('/')))
 
     def _pesquisa_init_(self):
         """Pesquisa inicial da tela."""
