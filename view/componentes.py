@@ -192,7 +192,7 @@ class FrameButtons(object):
         self.remove_button = tk.Button(self.frame)
 
     def _configure_(self):
-        self.label.configure(width=168)
+        self.label.configure(width=165)
         self.add_button.configure(text="Cadastrar", **style.BUTTON)
         self.remove_button.configure(text="Remover", **style.BUTTON)
         self.edit_button.configure(text="Editar", **style.BUTTON)

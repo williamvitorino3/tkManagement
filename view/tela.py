@@ -9,7 +9,6 @@ import clusores as validacao
 import tkinter as tk
 import defaults as style
 
-# TODO: Resolver problema do curselection.
 # TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.
 
 
@@ -46,9 +45,9 @@ class Janela(object):
         self.janela.pack()
         self.frame_dados_cliente.pack()
         self.nome.pack(side=tk.TOP)
-        self.data_nasc.pack(side=tk.LEFT, padx=3)
+        self.data_nasc.pack(side=tk.LEFT)
         self.atendimento.pack(side=tk.LEFT)
-        self.botoes.pack(side=tk.TOP)
+        # self.botoes.pack(side=tk.TOP)
         self.pesquisa.pack(side=tk.TOP)
         self.lista_clientes.pack()
         self.atualizar()

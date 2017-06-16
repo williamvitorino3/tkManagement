@@ -14,7 +14,7 @@ CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "width": 70,
+    "width": 72,
     "state": "readonly"
 }
 
