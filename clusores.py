@@ -37,15 +37,14 @@ def insercao(func):
             if len(self.data_nasc.get().split("/")[-1]) != 4:
                 raise AssertionError
             date(*[int(i) for i in self.data_nasc.get().split("/")[::-1]])
+            if not self.atendimento.get():
+                raise IndexError
         except ValueError:
             msg.showerror("Erro de validação", "Campo \"Data de nascimento\" em inválido.")
             return
         except AssertionError:
             msg.showerror("Erro de validação", "Ano deve ter 4 digitos.")
             return
-        try:
-            if not self.atendimento.get():
-                raise IndexError
         except IndexError:
             msg.showerror("Erro de validação", "Campo \"Tipo de Atendimento\" não seleionado.")
             return
