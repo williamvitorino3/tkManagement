@@ -47,7 +47,7 @@ class Janela(object):
         self.nome.pack(side=tk.TOP)
         self.data_nasc.pack(side=tk.LEFT)
         self.atendimento.pack(side=tk.LEFT)
-        # self.botoes.pack(side=tk.TOP)
+        self.botoes.pack(side=tk.TOP)
         self.pesquisa.pack(side=tk.TOP)
         self.lista_clientes.pack()
         self.atualizar()
@@ -63,7 +63,7 @@ class Janela(object):
 
     def _formata_data_(self, data):
         """Formata a data no formato dd/mm/yyy"""
-        return "{0:02d}/{1:02d}/{2:04d}".format(*map(int, data.split('/')))
+        return "{0:02d}/{1:02d}/{2:04d}".format(*[int(i) for i in data.split('/')])
 
     def _pesquisa_init_(self):
         """Pesquisa inicial da tela."""
@@ -148,6 +148,5 @@ class Janela(object):
         Calcula a quantidade de dias do ultima
         consulta do cliente.
         """
-        dia, mes, ano = cliente[2].split('/')
-        tempo = datetime.now() - datetime(int(ano), int(mes), int(dia))
+        tempo = datetime.now() - datetime(*[int(i) for i in cliente[2].split('/')[::-1]])
         return "%d dia%s" %(tempo.days, "" if tempo.days == 1 else "s")

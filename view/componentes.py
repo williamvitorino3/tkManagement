@@ -108,7 +108,7 @@ class ChooseMenu(object):
         self._frame_bd.pack(**kwargs)
         self.frame.pack(padx=2)
         self.label.pack(side=tk.LEFT, pady=9)
-        self.entry.pack(side=tk.LEFT, padx=2)
+        self.entry.pack(side=tk.LEFT)
 
     def get(self):
         """Devolve o valor da escolha."""
@@ -202,7 +202,7 @@ class FrameButtons(object):
         self._configure_()
         self._frame_bd.pack(**kwargs)
         self.frame.pack()
-        self.label.pack()
+        self.label.pack(padx=3)
         self.add_button.pack(side=tk.LEFT, padx=5)
         self.edit_button.pack(side=tk.LEFT, padx=5)
         self.remove_button.pack(side=tk.RIGHT, padx=5)

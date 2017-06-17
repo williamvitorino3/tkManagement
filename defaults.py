@@ -14,7 +14,7 @@ CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "width": 72,
+    "width": 71,
     "state": "readonly"
 }
 
@@ -28,7 +28,7 @@ ENTRY_TEXT = {
 
 BORDA = {
     "bd": 2,
-    "background": "#ffffff",
+    "background": "#000000",
 }
 
 LABEL = {
