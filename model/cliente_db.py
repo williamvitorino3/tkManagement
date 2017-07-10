@@ -45,7 +45,7 @@ def buscar_all():
     """Busca dados no banco."""
     conn = sqlite3.connect('clientes.db')
     cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM clientes""")
+    cursor.execute("""SELECT * FROM clientes ORDER BY nome""")
     resultado = cursor.fetchall()
     conn.close()
     return resultado
@@ -58,6 +58,7 @@ def buscar(nome):
     cursor.execute("""
     SELECT * FROM clientes
     WHERE nome like ?
+    ORDER BY nome
     """, ('%' + nome + '%', ))
     resultado = cursor.fetchall()
     conn.close()
@@ -68,10 +69,7 @@ def remover(id_cliente):
     """Remove do banco o cliente com o ID recebido."""
     conn = sqlite3.connect('clientes.db')
     cursor = conn.cursor()
-    cursor.execute("""
-    DELETE FROM clientes
-    WHERE id = ?
-    """, (id_cliente,))
+    cursor.execute("""DELETE FROM clientes WHERE id = ?""", (id_cliente,))
     conn.commit()
     conn.close()
 
