@@ -97,7 +97,7 @@ class ChooseMenu(object):
         self._frame_bd.configure(**style.BORDA)
         self.frame.configure(**style.FRAME)
         self.label.configure(**style.LABEL)
-        self.estilo.configure("TCombobox", **style.STYLE_COMBOBOX)
+        self.estilo.theme_use("clam")
         self.entry["values"] = style.ATENDIMENTOS
         self.entry.configure(**style.CHOOSE_COMBOBOX)
 

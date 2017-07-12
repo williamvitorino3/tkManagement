@@ -7,6 +7,7 @@ from model import cliente_db as db
 import view.componentes as wid
 import clusores as validacao
 import tkinter as tk
+from tkinter import ttk
 import defaults as style
 
 # TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.

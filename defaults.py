@@ -11,13 +11,13 @@ CHOOSE_BUTTONS = {
 }
 
 STYLE_COMBOBOX = {
-    
+    "insertbackground": "#000000",
+    "foreground": "#000000",
 }
 
 CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
-    "insertbackground": "#000000",
     "justify": "center",
     "width": 71,
     "state": "readonly",
