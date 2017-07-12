@@ -88,6 +88,7 @@ class ChooseMenu(object):
         self.opcao = tk.StringVar()
         self.label = tk.Label(self.frame, text=text)
         self.escolha = tk.StringVar()
+        self.estilo = ttk.Style()
         self.entry = ttk.Combobox(self.frame, textvariable=self.escolha)
         self._configure_()
 
@@ -96,6 +97,7 @@ class ChooseMenu(object):
         self._frame_bd.configure(**style.BORDA)
         self.frame.configure(**style.FRAME)
         self.label.configure(**style.LABEL)
+        self.estilo.configure("TCombobox", **style.STYLE_COMBOBOX)
         self.entry["values"] = style.ATENDIMENTOS
         self.entry.configure(**style.CHOOSE_COMBOBOX)
 

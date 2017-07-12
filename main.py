@@ -3,9 +3,11 @@
 
 from tkinter import Tk
 from view.tela import Janela
+from defaults import FRAME
 
 
 root = Tk()
+root.configure(**FRAME)
 root.title("tkMeanagement")
 root.resizable(False, False)
 root.geometry("1366x768+0+0")

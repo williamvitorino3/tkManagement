@@ -60,7 +60,7 @@ class Tabela(object):
         for coluna in self.colunas:
             self.colunas[coluna].lista.yview(*args)
 
-    def add_colunm(self, text="", width=20):
+    def add_colunm(self, text="", width=15):
         """Adiciona uma coluna na tabela."""
         self.colunas[text] = (Coluna(self.frame, text, width))
         self.colunas[text].lista.configure(yscrollcommand=self.rolagem.set)

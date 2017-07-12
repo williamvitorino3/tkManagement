@@ -32,9 +32,9 @@ class Janela(object):
 
     def _main_(self):
         u"""Método principal da Classe."""
-        self.lista_clientes.list.add_colunm("Último Atendimento", width=32)
+        self.lista_clientes.list.add_colunm("Último Atendimento", width=31)
         self.lista_clientes.list.add_colunm("Nome", width=32)
-        self.lista_clientes.list.add_colunm("Data Nascimento", width=32)
+        self.lista_clientes.list.add_colunm("Data Nascimento", width=31)
         self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=32)
         self.lista_clientes.list.add_colunm("Cadastrado à", width=32)
         self.botoes.add_button.configure(command=self.adicionar)

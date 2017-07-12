@@ -10,12 +10,17 @@ CHOOSE_BUTTONS = {
     "disabledforeground": "#000000"
 }
 
+STYLE_COMBOBOX = {
+    
+}
+
 CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
+    "insertbackground": "#000000",
     "justify": "center",
     "width": 71,
-    "state": "readonly"
+    "state": "readonly",
 }
 
 ENTRY_TEXT = {
