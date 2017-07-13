@@ -21,7 +21,7 @@ class Coluna(object):
     def __init__(self, master, text, width):
         """Construtor da classe."""
         self.janela = tk.Frame(master)
-        self._cabecalho_ = tk.Label(self.janela, text=text)
+        self._cabecalho_ = ttk.Label(self.janela, text=text)
         self.lista = tk.Listbox(self.janela, bd=2, width=width,
                                 selectmode=tk.SINGLE,
                                 exportselection=False)

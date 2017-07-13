@@ -27,7 +27,7 @@ ENTRY_TEXT = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "insertbackground": "#000000",
+    # "insertbackground": "#000000",
     "width": 150,
 }
 
@@ -50,9 +50,9 @@ FRAME = {
 
 BUTTON = {
     "width": 10,
-    "bg": "#eff0f1",
-    "fg": "#000000",
-    "relief": "solid"
+    # "bg": "#eff0f1",
+    # "fg": "#000000",
+    # "relief": "solid"
 }
 
 COLUN_LIST = {
@@ -68,6 +68,15 @@ COMBOBOX = {
     "justify": "center",
     "state": "readonly"
 }
+
+COLUNM_TABLE_HEADER = {
+    "width": 31,
+    "justify": "right",
+    # "bd": 2,
+    "relief": "ridge"
+}
+
+WIDTH_COLUNM = 31
 
 bg_widget = "#eff0f1"
 # bg_widget = "#000000"

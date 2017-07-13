@@ -56,7 +56,7 @@ class Janela(object):
         self.atendimento.pack(side=tk.LEFT)
         self.botoes.pack(side=tk.TOP)
         self.pesquisa.pack(side=tk.TOP)
-        self.lista_clientes.pack()
+        self.lista_clientes.pack(padx=5)
         self.atualizar()
 
     def set_clientes(self):

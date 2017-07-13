@@ -162,8 +162,8 @@ class SearchBox(object):
         self._frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self._frame_bd)
         self.label = tk.Label(self.frame, text=text)
-        self.entry = tk.Entry(self.frame)
-        self.button = tk.Button(self.frame)
+        self.entry = ttk.Entry(self.frame)
+        self.button = ttk.Button(self.frame)
         self._configure_()
 
     def _configure_(self):
@@ -191,9 +191,9 @@ class FrameButtons(object):
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self.frame = tk.Frame(self._frame_bd, **style.FRAME)
         self.label = tk.Label(self.frame, **style.LABEL)
-        self.add_button = tk.Button(self.frame)
-        self.edit_button = tk.Button(self.frame)
-        self.remove_button = tk.Button(self.frame)
+        self.add_button = ttk.Button(self.frame)
+        self.edit_button = ttk.Button(self.frame)
+        self.remove_button = ttk.Button(self.frame)
 
     def _configure_(self):
         self.label.configure(width=200)
