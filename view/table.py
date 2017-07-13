@@ -8,6 +8,11 @@ Implementação de uma tabela.
 
 from tkinter import ttk
 import tkinter as tk
+from platform import system as so
+if so().lower() == "windows":
+    import defaults_win as style
+else:
+    import defaults as style
 
 
 class Coluna(object):
@@ -17,10 +22,13 @@ class Coluna(object):
         """Construtor da classe."""
         self.janela = tk.Frame(master)
         self._cabecalho_ = tk.Label(self.janela, text=text)
-        self.lista = tk.Listbox(self.janela, bd=2, width=width, selectmode=tk.SINGLE, exportselection=False)
+        self.lista = tk.Listbox(self.janela, bd=2, width=width,
+                                selectmode=tk.SINGLE,
+                                exportselection=False)
         self.rolagem = ttk.Scrollbar(self.janela, orient=tk.HORIZONTAL,
                                      command=self.lista.xview)
-        self._cabecalho_.configure(width=width, bd=2, relief=tk.GROOVE)
+        # Adicionar a versão pro linux disso...
+        self._cabecalho_.configure(**style.COLUNM_TABLE_HEADER)
         self.lista.configure(xscrollcommand=self.rolagem.set)
         #self.lista.bind('<<ListboxSelect>>', self._selecionado_)
 

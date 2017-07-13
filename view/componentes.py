@@ -5,7 +5,11 @@
 from tkinter import ttk
 from view.table import Tabela
 import tkinter as tk
-import defaults as style
+from platform import system as so
+if so().lower() == "windows":
+    import defaults_win as style
+else:
+    import defaults as style
 
 
 class CustomCombobox(object):
@@ -88,7 +92,6 @@ class ChooseMenu(object):
         self.opcao = tk.StringVar()
         self.label = tk.Label(self.frame, text=text)
         self.escolha = tk.StringVar()
-        self.estilo = ttk.Style()
         self.entry = ttk.Combobox(self.frame, textvariable=self.escolha)
         self._configure_()
 
@@ -97,7 +100,6 @@ class ChooseMenu(object):
         self._frame_bd.configure(**style.BORDA)
         self.frame.configure(**style.FRAME)
         self.label.configure(**style.LABEL)
-        self.estilo.theme_use("clam")
         self.entry["values"] = style.ATENDIMENTOS
         self.entry.configure(**style.CHOOSE_COMBOBOX)
 
@@ -126,7 +128,7 @@ class TextBox(object):
         self.frame = tk.Frame(self._frame_bd)
         # self.frame = tk.Frame(tela, bd=10)
         self.label = tk.Label(self.frame, text=text)
-        self.entry = tk.Entry(self.frame)
+        self.entry = ttk.Entry(self.frame)
         self._configure_()
 
     def _configure_(self):
@@ -194,7 +196,7 @@ class FrameButtons(object):
         self.remove_button = tk.Button(self.frame)
 
     def _configure_(self):
-        self.label.configure(width=165)
+        self.label.configure(width=200)
         self.add_button.configure(text="Cadastrar", **style.BUTTON)
         self.remove_button.configure(text="Remover", **style.BUTTON)
         self.edit_button.configure(text="Editar", **style.BUTTON)

@@ -8,7 +8,11 @@ import view.componentes as wid
 import clusores as validacao
 import tkinter as tk
 from tkinter import ttk
-import defaults as style
+from platform import system as so
+if so().lower() == "windows":
+    import defaults_win as style
+else:
+    import defaults as style
 
 # TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.
 
@@ -19,10 +23,12 @@ class Janela(object):
     def __init__(self, root):
         """Construtor da classe."""
         self.janela = tk.Frame(root, **style.BORDA)
+        self.estilo = ttk.Style()
+        self.estilo.theme_use("clam")
         self.frame_dados_cliente = tk.Frame(self.janela, **style.BORDA)
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
         self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
-        self.data_nasc.entry.configure(width=58)
+        self.data_nasc.entry.configure(width=int(self.data_nasc.entry["width"]*0.4))
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente, text="Atendimento")
         self.botoes = wid.FrameButtons(self.janela)
         self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
@@ -33,11 +39,11 @@ class Janela(object):
 
     def _main_(self):
         u"""Método principal da Classe."""
-        self.lista_clientes.list.add_colunm("Último Atendimento", width=31)
-        self.lista_clientes.list.add_colunm("Nome", width=32)
-        self.lista_clientes.list.add_colunm("Data Nascimento", width=31)
-        self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=32)
-        self.lista_clientes.list.add_colunm("Cadastrado à", width=32)
+        self.lista_clientes.list.add_colunm("Último Atendimento", width=style.WIDTH_COLUNM)
+        self.lista_clientes.list.add_colunm("Nome", width=style.WIDTH_COLUNM)
+        self.lista_clientes.list.add_colunm("Data Nascimento", width=style.WIDTH_COLUNM)
+        self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=style.WIDTH_COLUNM)
+        self.lista_clientes.list.add_colunm("Cadastrado à", width=style.WIDTH_COLUNM)
         self.botoes.add_button.configure(command=self.adicionar)
         self.botoes.remove_button.configure(command=self.remover)
         self.botoes.edit_button.configure(command=self.editar)
