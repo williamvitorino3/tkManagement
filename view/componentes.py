@@ -49,7 +49,7 @@ class ChooseData(object):
     def __init__(self, tela, text):
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self._frame = tk.Frame(self._frame_bd)
-        self._label = tk.Label(self._frame, text=text, **style.LABEL)
+        self._label = ttk.Label(self._frame, text=text, **style.LABEL)
         self._dia = CustomCombobox(self._frame, 31, "Dia")
         self._mes = CustomCombobox(self._frame, 12, "Mês")
         self._ano = CustomCombobox(self._frame, 2017, "Ano")
@@ -90,7 +90,7 @@ class ChooseMenu(object):
         self._frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self._frame_bd)
         self.opcao = tk.StringVar()
-        self.label = tk.Label(self.frame, text=text)
+        self.label = ttk.Label(self.frame, text=text)
         self.escolha = tk.StringVar()
         self.entry = ttk.Combobox(self.frame, textvariable=self.escolha)
         self._configure_()
@@ -127,7 +127,7 @@ class TextBox(object):
         self._frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self._frame_bd)
         # self.frame = tk.Frame(tela, bd=10)
-        self.label = tk.Label(self.frame, text=text)
+        self.label = ttk.Label(self.frame, text=text)
         self.entry = ttk.Entry(self.frame)
         self._configure_()
 
@@ -142,7 +142,7 @@ class TextBox(object):
         u"""Substituição do método pack()."""
         self._frame_bd.pack(**kargs)
         self.frame.pack()
-        self.label.pack(side=tk.LEFT, pady=9)
+        self.label.pack(side=tk.LEFT, pady=9, padx=5)
         self.entry.pack(side=tk.RIGHT)
 
     def insert(self, *args):
@@ -161,7 +161,7 @@ class SearchBox(object):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela)
         self.frame = tk.Frame(self._frame_bd)
-        self.label = tk.Label(self.frame, text=text)
+        self.label = ttk.Label(self.frame, text=text)
         self.entry = ttk.Entry(self.frame)
         self.button = ttk.Button(self.frame)
         self._configure_()
@@ -190,7 +190,7 @@ class FrameButtons(object):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self.frame = tk.Frame(self._frame_bd, **style.FRAME)
-        self.label = tk.Label(self.frame, **style.LABEL)
+        self.label = ttk.Label(self.frame, **style.LABEL)
         self.add_button = ttk.Button(self.frame)
         self.edit_button = ttk.Button(self.frame)
         self.remove_button = ttk.Button(self.frame)
@@ -219,6 +219,7 @@ class Lista(object):
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self.frame_buttons = tk.Frame(self._frame_bd)
         self.frame = tk.Frame(self._frame_bd)
+        self.linha_invisivel = ttk.Label(self.frame_buttons, **style.LABEL)
         self.list = Tabela(self.frame)
 
     def _configure_(self):
@@ -226,6 +227,7 @@ class Lista(object):
         self._frame_bd.configure()
         self.frame_buttons.configure(bg=style.bg_widget)
         self.frame.configure(**style.FRAME)
+        self.linha_invisivel.configure(width=300)
         for item in self.list.colunas:
             self.list.colunas[item].lista.configure(**style.COLUN_LIST)
 
@@ -233,7 +235,8 @@ class Lista(object):
         u"""Substituição do método pack()."""
         self._configure_()
         self._frame_bd.pack(**kwargs)
-        self.frame_buttons.pack(padx=2)
+        self.frame_buttons.pack()
+        self.linha_invisivel.pack()
         self.list.pack(side=tk.RIGHT, fill=tk.Y, padx=2)
         self.frame.pack()
 
