@@ -2,14 +2,14 @@
 
 u"""Implementação da tela principal do projeto."""
 
-from datetime import datetime
 from model import cliente_db as db
+from platform import system as SO
+from datetime import datetime
+from tkinter import ttk
 import view.componentes as wid
 import clusores as validacao
 import tkinter as tk
-from tkinter import ttk
-from platform import system as so
-if so().lower() == "windows":
+if SO().lower() == "windows":
     import defaults_win as style
 else:
     import defaults as style
