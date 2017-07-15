@@ -25,39 +25,64 @@ class Janela(object):
         self.janela = tk.Frame(root, **style.BORDA)
         self.estilo = ttk.Style()
         self.estilo.theme_use("clam")
-        self.frame_dados_cliente = tk.Frame(self.janela, **style.BORDA)
+        # Frame paraa manipulação dos dados.
+        self.frame_management = tk.Frame(self.janela, **style.BORDA)
+        # Frame para a saída de dados.
+        self.frame_output = tk.Frame(self.janela, **style.BORDA)
+
+        self.frame_dados_cliente = tk.Frame(self.frame_management, **style.BORDA)
+        self.frame_botoes_acao = tk.Frame(self.frame_management, **style.BORDA)
+
+        # Gerência de dados.
         self.nome = wid.TextBox(self.frame_dados_cliente, text="Nome")
         self.data_nasc = wid.TextBox(self.frame_dados_cliente, text="Data Nascimento")
         self.data_nasc.entry.configure(width=int(self.data_nasc.entry["width"]*0.4))
         self.atendimento = wid.ChooseMenu(self.frame_dados_cliente, text="Atendimento")
-        self.botoes = wid.FrameButtons(self.janela)
-        self.pesquisa = wid.SearchBox(self.janela, text="Pesquisa")
-        self.lista_clientes = wid.Lista(self.janela)
+        self.botoes = wid.FrameButtons(self.frame_botoes_acao)
+
+        # Saída dedados.
+        self.pesquisa = wid.SearchBox(self.frame_output, text="Pesquisa")
+        self.lista_clientes = wid.Lista(self.frame_output)
         self.clientes = []
         self._lest_id_ = 0
         self._main_()
 
-    def _main_(self):
-        u"""Método principal da Classe."""
+    def add_collunms(self):
+        """Adiciona as colunas na tabela."""
         self.lista_clientes.list.add_colunm("Último Atendimento", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Nome", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Data Nascimento", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Cadastrado à", width=style.WIDTH_COLUNM)
+
+    def configure_buttons(self):
+        """Configura os botões."""
         self.botoes.add_button.configure(command=self.adicionar)
         self.botoes.remove_button.configure(command=self.remover)
         self.botoes.edit_button.configure(command=self.editar)
         self.pesquisa.button.configure(command=self.pesquisar)
         self.pesquisa.entry.bind("<Return>", self.pesquisar)
-        self.janela.pack()
-        self.frame_dados_cliente.pack()
-        self.nome.pack(side=tk.TOP)
-        self.data_nasc.pack(side=tk.LEFT)
-        self.atendimento.pack(side=tk.LEFT)
-        self.botoes.pack(side=tk.TOP)
-        self.pesquisa.pack(side=tk.TOP)
-        self.lista_clientes.pack()
+
+    def _main_(self):
+        u"""Método principal da Classe."""
+        self.add_collunms()
+        self.configure_buttons()
+        self.pack(padx=7)
         self.atualizar()
+
+    def pack(self, **kwargs):
+        """Plota os componentes na tela."""
+        self.janela.pack(**kwargs)
+        self.frame_management.pack(side=tk.TOP)
+        self.frame_output.pack(side=tk.TOP)
+        self.frame_dados_cliente.pack(side=tk.RIGHT)
+        self.frame_botoes_acao.pack(side=tk.LEFT)
+        self.botoes.pack(side=tk.TOP)
+        self.nome.pack(side=tk.TOP, pady=16)
+        self.data_nasc.pack(side=tk.LEFT, pady=16)
+        self.atendimento.pack(side=tk.LEFT, pady=16)
+        self.pesquisa.pack(side=tk.TOP)
+        self.lista_clientes.pack(side=tk.TOP)
 
     def set_clientes(self):
         """Adiciona os dados na lista de clientes."""

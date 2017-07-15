@@ -111,8 +111,8 @@ class ChooseMenu(object):
         u"""Substituição do método pack()."""
         self._frame_bd.pack(**kwargs)
         self.frame.pack(padx=2)
-        self.label.pack(side=tk.LEFT, pady=9)
-        self.entry.pack(side=tk.LEFT)
+        self.label.pack(side=tk.LEFT, pady=9, padx=5)
+        self.entry.pack(side=tk.LEFT, pady=9, padx=5)
 
     def get(self):
         """Devolve o valor da escolha."""
@@ -143,7 +143,7 @@ class TextBox(object):
         self._frame_bd.pack(**kargs)
         self.frame.pack()
         self.label.pack(side=tk.LEFT, pady=9, padx=5)
-        self.entry.pack(side=tk.RIGHT)
+        self.entry.pack(side=tk.RIGHT, pady=9, padx=5)
 
     def insert(self, *args):
         """Substituição do método insert()."""
@@ -173,15 +173,15 @@ class SearchBox(object):
         self.label.configure(**style.LABEL)
         self.entry.configure(**style.ENTRY_TEXT)
         self.button.configure(text="Pesquisar", **style.BUTTON)
-        self.entry.configure(width=(style.ENTRY_TEXT["width"]-14))
+        self.entry.configure(width=(style.ENTRY_TEXT["width"]+2))
 
     def pack(self, **kwargs):
         """Substituição do método pack()."""
         self._frame_bd.pack(**kwargs)
         self.frame.pack()
-        self.label.pack(side=tk.LEFT)
-        self.button.pack(side=tk.RIGHT)
-        self.entry.pack(side=tk.RIGHT, padx=2)
+        self.label.pack(side=tk.LEFT, padx=5, pady=5)
+        self.button.pack(side=tk.RIGHT, padx=5, pady=5)
+        self.entry.pack(side=tk.RIGHT, padx=5, pady=5)
 
 class FrameButtons(object):
     """Implementa uma lista de botões."""
@@ -190,13 +190,12 @@ class FrameButtons(object):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela, **style.BORDA)
         self.frame = tk.Frame(self._frame_bd, **style.FRAME)
-        self.label = ttk.Label(self.frame, **style.LABEL)
         self.add_button = ttk.Button(self.frame)
         self.edit_button = ttk.Button(self.frame)
         self.remove_button = ttk.Button(self.frame)
 
     def _configure_(self):
-        self.label.configure(width=200)
+        # self.label.configure(width=200)
         self.add_button.configure(text="Cadastrar", **style.BUTTON)
         self.remove_button.configure(text="Remover", **style.BUTTON)
         self.edit_button.configure(text="Editar", **style.BUTTON)
@@ -206,10 +205,10 @@ class FrameButtons(object):
         self._configure_()
         self._frame_bd.pack(**kwargs)
         self.frame.pack()
-        self.label.pack(padx=3)
-        self.add_button.pack(side=tk.LEFT, padx=5)
-        self.edit_button.pack(side=tk.LEFT, padx=5)
-        self.remove_button.pack(side=tk.RIGHT, padx=5)
+        # self.label.pack(padx=3)
+        self.add_button.pack(side=tk.TOP, padx=5, pady=5)
+        self.edit_button.pack(side=tk.TOP, padx=5, pady=5)
+        self.remove_button.pack(side=tk.TOP, padx=5, pady=5)
 
 class Lista(object):
     """Implementa uma lista de atributos."""
@@ -217,17 +216,13 @@ class Lista(object):
     def __init__(self, tela):
         """Construtor da classe."""
         self._frame_bd = tk.Frame(tela, **style.BORDA)
-        self.frame_buttons = tk.Frame(self._frame_bd)
         self.frame = tk.Frame(self._frame_bd)
-        self.linha_invisivel = ttk.Label(self.frame_buttons, **style.LABEL)
         self.list = Tabela(self.frame)
 
     def _configure_(self):
         """Configura os Widgets do Componente."""
         self._frame_bd.configure()
-        self.frame_buttons.configure(bg=style.bg_widget)
         self.frame.configure(**style.FRAME)
-        self.linha_invisivel.configure(width=300)
         for item in self.list.colunas:
             self.list.colunas[item].lista.configure(**style.COLUN_LIST)
 
@@ -235,9 +230,7 @@ class Lista(object):
         u"""Substituição do método pack()."""
         self._configure_()
         self._frame_bd.pack(**kwargs)
-        self.frame_buttons.pack()
-        self.linha_invisivel.pack()
-        self.list.pack(side=tk.RIGHT, fill=tk.Y, padx=2)
+        self.list.pack(side=tk.RIGHT, fill=tk.Y, padx=10, pady=10)
         self.frame.pack()
 
     def insert(self, *args):

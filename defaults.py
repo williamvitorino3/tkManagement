@@ -19,7 +19,7 @@ CHOOSE_COMBOBOX = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    "width": 71,
+    "width": 56,
     "state": "readonly",
 }
 
@@ -27,8 +27,7 @@ ENTRY_TEXT = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "justify": "center",
-    # "insertbackground": "#000000",
-    "width": 150,
+    "width": 129,
 }
 
 BORDA = {
@@ -40,21 +39,17 @@ LABEL = {
     "background": "#eff0f1",
     "foreground": "#000000",
     "width": 15,
-    "relief": "flat",
+    "relief": "ridge",
 }
 
 FRAME = {
-    "bd": 5,
+    "bd": 4,
     "background": "#eff0f1",
     "relief": "ridge"
 }
 
 BUTTON = {
     "width": 10,
-    # "background": "#eff0f1",
-    # "foreground": "#000000",
-    # "relief": "solid"
-    
 }
 
 COLUN_LIST = {
@@ -73,17 +68,11 @@ COMBOBOX = {
 
 COLUNM_TABLE_HEADER = {
     "width": 31,
-    "justify": "right",
-    # "bd": 2,
+    "justify": "center",
     "relief": "ridge"
 }
 
 WIDTH_COLUNM = 31
 
-background_widget = "#eff0f1"
 bg_widget = "#000000"
-fg_widget = "#000000"
-insert_background = fg_widget
-justify_text = "center"
-ATENDIMENTOS = ["Cortesia", "Particular", "Amil", "Cafaz", "Cassi", "Geap",
-                "Saúde_Caixa", "Unimed"]
+ATENDIMENTOS = ["Cortesia", "Particular", "Amil", "Cafaz", "Cassi", "Geap", "Saúde_Caixa", "Unimed"]
