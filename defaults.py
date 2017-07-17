@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 u"""Variáveis padrões pada o projeto."""
 
+BG = "#cbfbf3"
+
+WIDTH_COLUNM = 31
+
 CHOOSE_BUTTONS = {
-    "background": "#eff0f1",
+    "background": BG,
     "foreground": "#000000",
-    "activebackground": "#eff0f1",
+    "activebackground": BG,
     "activeforeground": "#000000",
     "relief": "solid",
     "disabledforeground": "#000000"
+}
+
+LABEL_BUTTON = {
+    "background": [('disabled','#d9d9d9'), ('active','#d9d9d9')],
+    "foreground": [('disabled','#a3a3a3')],
+    "relief": [('pressed', 'disabled', 'sunken')],
 }
 
 STYLE_COMBOBOX = {
@@ -16,7 +26,7 @@ STYLE_COMBOBOX = {
 }
 
 CHOOSE_COMBOBOX = {
-    "background": "#eff0f1",
+    "background": BG,
     "foreground": "#000000",
     "justify": "center",
     "width": 56,
@@ -24,7 +34,7 @@ CHOOSE_COMBOBOX = {
 }
 
 ENTRY_TEXT = {
-    "background": "#eff0f1",
+    "background": BG,
     "foreground": "#000000",
     "justify": "center",
     "width": 129,
@@ -32,19 +42,20 @@ ENTRY_TEXT = {
 
 BORDA = {
     "bd": 2,
-    "background": "#eff0f1",
+    "background": BG,
 }
 
 LABEL = {
-    "background": "#eff0f1",
-    "foreground": "#000000",
+    #"background": BG,
+    #"foreground": "#000000",
     "width": 15,
-    "relief": "ridge",
+    "relief": "solid",
+    "justify": "center",
 }
 
 FRAME = {
     "bd": 4,
-    "background": "#eff0f1",
+    "background": BG,
     "relief": "ridge"
 }
 
@@ -54,7 +65,7 @@ BUTTON = {
 
 COLUN_LIST = {
     "justify": "center",
-    "background": "#eff0f1",
+    "background": BG,
     "bd": 2,
     "selectmode": "extended",
     "foreground": "#000000"
@@ -72,7 +83,6 @@ COLUNM_TABLE_HEADER = {
     "relief": "ridge"
 }
 
-WIDTH_COLUNM = 31
 
 bg_widget = "#000000"
 ATENDIMENTOS = ["Cortesia", "Particular", "Amil", "Cafaz", "Cassi", "Geap", "Saúde_Caixa", "Unimed"]
