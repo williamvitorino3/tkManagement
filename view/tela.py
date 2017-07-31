@@ -15,7 +15,8 @@ else:
     import defaults as style
 
 # TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.
-
+# TODO: Mudar "Cadastrado a" para "Atendido a".
+# TODO: Alterar a cor dos botões.
 
 class Janela(object):
     u"""Implementação da janela."""
