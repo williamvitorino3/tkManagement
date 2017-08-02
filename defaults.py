@@ -36,7 +36,7 @@ CHOOSE_COMBOBOX = {
 ENTRY_TEXT = {
     "background": BG,
     "foreground": "#000000",
-    "justify": "center",
+    "justify": "left",
     "width": 129,
 }
 
