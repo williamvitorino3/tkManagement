@@ -54,7 +54,7 @@ class Janela(object):
         self.lista_clientes.list.add_colunm("Nome", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Data Nascimento", width=style.WIDTH_COLUNM)
         self.lista_clientes.list.add_colunm("Tipo de Atendimento", width=style.WIDTH_COLUNM)
-        self.lista_clientes.list.add_colunm("Cadastrado à", width=style.WIDTH_COLUNM)
+        self.lista_clientes.list.add_colunm("Atendido há", width=style.WIDTH_COLUNM)
 
     def configure_buttons(self):
         """Configura os botões."""
