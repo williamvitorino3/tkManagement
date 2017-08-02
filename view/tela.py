@@ -92,7 +92,7 @@ class Janela(object):
             self.lista_clientes.insert("Último Atendimento", cliente[2])
             self.lista_clientes.insert("Data Nascimento", self._formata_data_(cliente[3]))
             self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
-            self.lista_clientes.insert("Cadastrado à", self._ultima_consulta_(cliente))
+            self.lista_clientes.insert("Atendido há", self._ultima_consulta_(cliente))
 
     def _formata_data_(self, data):
         """Formata a data no formato dd/mm/yyy"""
