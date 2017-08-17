@@ -4,6 +4,7 @@
 
 import sqlite3
 from datetime import datetime
+from controller.cliente import Cliente
 
 
 def criar_banco():
@@ -45,7 +46,7 @@ def buscar_all():
     with sqlite3.connect('clientes.db') as conn:
         cursor = conn.cursor()
         cursor.execute("""SELECT * FROM clientes ORDER BY nome""")
-        resultado = cursor.fetchall()
+        resultado = [Cliente(*dados) for dados in cursor.fetchall()]
     return resultado
 
 
@@ -58,7 +59,7 @@ def buscar(nome):
         WHERE nome like ?
         ORDER BY nome
         """, ('%' + nome + '%', ))
-        resultado = cursor.fetchall()
+        resultado = [Cliente(*dados) for dados in cursor.fetchall()]
     return resultado
 
 

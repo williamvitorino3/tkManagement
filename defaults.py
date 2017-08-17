@@ -46,10 +46,10 @@ BORDA = {
 }
 
 LABEL = {
-    #"background": BG,
+    "background": BG,
     #"foreground": "#000000",
     "width": 15,
-    "relief": "solid",
+    "relief": "ridge",
     "justify": "center",
 }
 

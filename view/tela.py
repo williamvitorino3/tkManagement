@@ -14,9 +14,12 @@ if SO().lower() == "windows":
 else:
     import defaults as style
 
+from controller.cliente import Cliente
+
 # TODO: Resolver imcompatibilidade do tamanho dos widgets do windows.
 # TODO: Mudar "Cadastrado a" para "Atendido a".
 # TODO: Alterar a cor dos botões.
+
 
 class Janela(object):
     u"""Implementação da janela."""
@@ -28,9 +31,9 @@ class Janela(object):
         self.estilo.theme_use("clam")
         # Frame paraa manipulação dos dados.
         self.frame_management = tk.Frame(self.janela, **style.BORDA)
+        
         # Frame para a saída de dados.
         self.frame_output = tk.Frame(self.janela, **style.BORDA)
-
         self.frame_dados_cliente = tk.Frame(self.frame_management, **style.BORDA)
         self.frame_botoes_acao = tk.Frame(self.frame_management, **style.BORDA)
 
@@ -88,11 +91,15 @@ class Janela(object):
     def set_clientes(self):
         """Adiciona os dados na lista de clientes."""
         for cliente in self.clientes[::-1]:
-            self.lista_clientes.insert("Nome", cliente[1])
-            self.lista_clientes.insert("Último Atendimento", cliente[2])
-            self.lista_clientes.insert("Data Nascimento", self._formata_data_(cliente[3]))
-            self.lista_clientes.insert("Tipo de Atendimento", cliente[4])
-            self.lista_clientes.insert("Atendido há", self._ultima_consulta_(cliente))
+            for key in cliente.get().keys():
+                if key == "id": continue
+                self.lista_clientes.insert(key, cliente.get()[key])
+            """
+            self.lista_clientes.insert("Nome", cliente.nome)
+            self.lista_clientes.insert("Último Atendimento", cliente.ultimo_atendimento)
+            self.lista_clientes.insert("Data Nascimento", self._formata_data_(cliente.data_nascimeoto))
+            self.lista_clientes.insert("Tipo de Atendimento", cliente.tipo_atendimento)
+            self.lista_clientes.insert("Atendido há", self._ultima_consulta_(cliente))"""
 
     def _formata_data_(self, data):
         """Formata a data no formato dd/mm/yyy"""
@@ -137,7 +144,7 @@ class Janela(object):
 
     def _edicao_(self):
         """
-        Faz a atualização da tela,  necesária para a edição
+        Faz a atualização da tela, necesária para a edição
         de um paciente.
         """
         if self.botoes.add_button["text"] == "Cadastrar":
@@ -168,18 +175,10 @@ class Janela(object):
             self._limpar_entradas_()
             for i in self.lista_clientes.list.curselection():
                 pos = int(i)
-                self._lest_id_ = self.clientes[pos][0]
-                self.nome.entry.insert(0, self.clientes[pos][1])
-                self.data_nasc.entry.insert(0, self.clientes[pos][3])
-                self.atendimento.set(self.clientes[pos][4])
+                self._lest_id_ = self.clientes[pos].id
+                self.nome.entry.insert(0, self.clientes[pos].nome)
+                self.data_nasc.entry.insert(0, self.clientes[pos].data_nascimento)
+                self.atendimento.set(self.clientes[pos].ultimo_atendimento)
             self._edicao_()
         except TypeError:
             pass
-
-    def _ultima_consulta_(self, cliente):
-        """
-        Calcula a quantidade de dias do ultima
-        consulta do cliente.
-        """
-        tempo = datetime.now() - datetime(*[int(i) for i in cliente[2].split('/')[::-1]])
-        return "%d dia%s" %(tempo.days, "" if tempo.days == 1 else "s")
