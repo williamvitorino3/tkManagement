@@ -37,7 +37,6 @@ def inserir(nome="None", data_nascimento="None", tipo_atendimento="None"):
         """, (_now_(), nome, data_nascimento, tipo_atendimento))
 
         conn.commit()
-        conn.close()
 
 
 def buscar_all():

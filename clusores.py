@@ -31,7 +31,7 @@ def insercao(func):
     def campos_vazios(self):
         """Valida os campos de texto."""
         if not self.nome.entry.get():
-            msg.showerror("Erro de validação", "Campo \"Nome\" em vazio.")
+            msg.showerror("Erro de validação", "Campo \"Nome\" está vazio.")
             return
         try:
             if len(self.data_nasc.get().split("/")[-1]) != 4:
